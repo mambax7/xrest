@@ -75,11 +75,11 @@
 			$schedule->setVar('when', time());
 			$schedule->setVar('tweeted', time());
 			$scheduler_handler->insert($schedule);
-			$ret[]['title'] = $tweet;
-			$ret[sizeof($ret)]['link'] = $link;
-			$ret[sizeof($ret)]['description'] = htmlspecialchars_decode($tweet);
-			$ret[sizeof($ret)]['lid'] = $lid;
-			$ret[sizeof($ret)]['sid'] = $schedule->getVar('sid');
+			$ret[]['title']                  = $tweet;
+            $ret[count($ret)]['link']        = $link;
+            $ret[count($ret)]['description'] = htmlspecialchars_decode($tweet);
+            $ret[count($ret)]['lid']         = $lid;
+            $ret[count($ret)]['sid']         = $schedule->getVar('sid');
 			if (count($ret)>$GLOBALS['twitterbombModuleConfig']['scheduler_items']) {
 				foreach($ret as $key => $value) {
 					if (count($ret)>$GLOBALS['twitterbombModuleConfig']['scheduler_items'])

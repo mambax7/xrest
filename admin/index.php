@@ -29,7 +29,7 @@ case 'dashboard':
 	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_FIELDS . '</label>', $fields_handler->getCount(), ($tables_handler->getCount() > 0?'Green':'Red'));
 	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_AVERAGE_FIELDS . '</label>', number_format(($fields_handler->getCount() + 1) / ($tables_handler->getCount(new Criteria('`view`', '0', '=')) + 1), 2), (number_format(($fields_handler->getCount() + 1) / ($tables_handler->getCount(new Criteria('`view`', '0', '=')) + 1), 2) > 0?'Green':'Red'));
 	$lastplugin = XoopsCache::read('xrest_plugins_last');
-	if (sizeof($lastplugin)>=5) {
+	if (count($lastplugin) >= 5) {
 		$indexAdmin->addInfoBox(_XREST_AM_XREST_LASTANDDATE);
 		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_CALLED . '</label>', $lastplugin['plugin'], 'Blue');
 		if (!empty($lastplugin['user']))
