@@ -2,8 +2,8 @@
 
 require __DIR__ . '/admin_header.php';
 
-$op     = (isset($_REQUEST['op']) ? $_REQUEST['op'] : 'dashboard');
-$tbl_id = (isset($_REQUEST['tbl_id']) ? $_REQUEST['tbl_id'] : 0);
+$op     = ($_REQUEST['op'] ?? 'dashboard');
+$tbl_id = ($_REQUEST['tbl_id'] ?? 0);
 
 switch ($op) {
     default:

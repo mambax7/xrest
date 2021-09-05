@@ -114,11 +114,7 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
         if (0 == $this->getCount($criteria)) {
             return false;
         } elseif ($objects = $this->getObjects($criteria, false)) {
-            if (isset($objects[0])) {
-                return $objects[0];
-            } else {
-                return false;
-            }
+            return $objects[0] ?? false;
         }
         return false;
     }

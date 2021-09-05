@@ -4,7 +4,7 @@ require_once __DIR__ . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 xoops_loadLanguage('forms', 'xrest');
-$op = (isset($_REQUEST['op']) ? $_REQUEST['op'] : 'default');
+$op = ($_REQUEST['op'] ?? 'default');
 
 xoops_cp_header();
 loadModuleAdminMenu(5);
