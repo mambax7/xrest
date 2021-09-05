@@ -1,37 +1,36 @@
-
-CREATE TABLE `rest_tables` (                 
-      `tbl_id` int(20) unsigned NOT NULL auto_increment,  
-      `tablename` varchar(220) default NULL,              
-      `allowpost` tinyint(2) default '0',                 
-      `allowretrieve` tinyint(2) default '0',             
-      `allowupdate` tinyint(2) default '0',             
-      `visible` tinyint(2) default '0',                   
-      `view` tinyint(2) default '0',  
-      PRIMARY KEY  (`tbl_id`)           
+CREATE TABLE `rest_tables` (
+    `tbl_id`        INT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `tablename`     VARCHAR(220) DEFAULT NULL,
+    `allowpost`     TINYINT(2)   DEFAULT '0',
+    `allowretrieve` TINYINT(2)   DEFAULT '0',
+    `allowupdate`   TINYINT(2)   DEFAULT '0',
+    `visible`       TINYINT(2)   DEFAULT '0',
+    `view`          TINYINT(2)   DEFAULT '0',
+    PRIMARY KEY (`tbl_id`)
 );
 
-CREATE TABLE `rest_fields` (                 
-      `fld_id` int(30) unsigned NOT NULL auto_increment,  
-      `tbl_id` int(20) default '0',                       
-      `key` tinyint(2) default '0',                       
-      `fieldname` varchar(220) default NULL,              
-      `allowpost` tinyint(2) default '0',                 
-      `allowretrieve` tinyint(2) default '0',             
-      `allowupdate` tinyint(2) default '0',             
-      `visible` tinyint(2) default '0',                   
-      `string` tinyint(2) default '0',                    
-      `int` tinyint(2) default '0',                       
-      `float` tinyint(2) default '0',                     
-      `text` tinyint(2) default '0',                      
-      `other` tinyint(2) default '0',
-      `crc` tinyint(2) default '0',                                          
-      PRIMARY KEY  (`fld_id`)           
+CREATE TABLE `rest_fields` (
+    `fld_id`        INT(30) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `tbl_id`        INT(20)      DEFAULT '0',
+    `key`           TINYINT(2)   DEFAULT '0',
+    `fieldname`     VARCHAR(220) DEFAULT NULL,
+    `allowpost`     TINYINT(2)   DEFAULT '0',
+    `allowretrieve` TINYINT(2)   DEFAULT '0',
+    `allowupdate`   TINYINT(2)   DEFAULT '0',
+    `visible`       TINYINT(2)   DEFAULT '0',
+    `string`        TINYINT(2)   DEFAULT '0',
+    `int`           TINYINT(2)   DEFAULT '0',
+    `float`         TINYINT(2)   DEFAULT '0',
+    `text`          TINYINT(2)   DEFAULT '0',
+    `other`         TINYINT(2)   DEFAULT '0',
+    `crc`           TINYINT(2)   DEFAULT '0',
+    PRIMARY KEY (`fld_id`)
 );
 
-CREATE TABLE `rest_plugins` (                   
-      `plugin_id` int(10) unsigned NOT NULL auto_increment,  
-      `plugin_name` varchar(255) default NULL,               
-      `plugin_file` varchar(255) default NULL,               
-      `active` tinyint(2) default '0',
-      PRIMARY KEY  (`plugin_id`)                             
+CREATE TABLE `rest_plugins` (
+    `plugin_id`   INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `plugin_name` VARCHAR(255) DEFAULT NULL,
+    `plugin_file` VARCHAR(255) DEFAULT NULL,
+    `active`      TINYINT(2)   DEFAULT '0',
+    PRIMARY KEY (`plugin_id`)
 );
