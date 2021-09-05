@@ -59,22 +59,22 @@
 /**
  * Marker constant for Services_JSON::decode(), used to flag stack state
  */
-define('SERVICES_JSON_SLICE',   1);
+define('SERVICES_JSON_SLICE', 1);
 
 /**
  * Marker constant for Services_JSON::decode(), used to flag stack state
  */
-define('SERVICES_JSON_IN_STR',  2);
+define('SERVICES_JSON_IN_STR', 2);
 
 /**
  * Marker constant for Services_JSON::decode(), used to flag stack state
  */
-define('SERVICES_JSON_IN_ARR',  3);
+define('SERVICES_JSON_IN_ARR', 3);
 
 /**
  * Marker constant for Services_JSON::decode(), used to flag stack state
  */
-define('SERVICES_JSON_IN_OBJ',  4);
+define('SERVICES_JSON_IN_OBJ', 4);
 
 /**
  * Marker constant for Services_JSON::decode(), used to flag stack state
@@ -783,9 +783,7 @@ if (class_exists('PEAR_Error')) {
             parent::PEAR_Error($message, $code, $mode, $options, $userinfo);
         }
     }
-
 } else {
-
     /**
      * @todo Ultimately, this class shall be descended from PEAR_Error
      */
@@ -800,7 +798,6 @@ if (class_exists('PEAR_Error')) {
         ) {
         }
     }
-
 }
-    
+
 ?>
