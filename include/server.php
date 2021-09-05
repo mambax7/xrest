@@ -2,7 +2,7 @@
 $GLOBALS['xrestPlugin']['when'] = microtime(true);
 $GLOBALS['xoopsLogger']->activated = false;
 
-$xoopsPreload =& XoopsPreload::getInstance();
+$xoopsPreload = XoopsPreload::getInstance();
 $xoopsPreload->triggerEvent('api.server.bootstrap');
 
 $result = [];
@@ -41,7 +41,7 @@ if (isset($_GET)) {
 	}
 }
 
-$xoopsPreload =& XoopsPreload::getInstance();
+$xoopsPreload = XoopsPreload::getInstance();
 $xoopsPreload->triggerEvent('api.server.start', [$mode, $plugin, $path, $request, $values]);
 
 switch($mode) {
@@ -288,7 +288,7 @@ switch($mode) {
 		break;
 	}
 	
-	$xoopsPreload =& XoopsPreload::getInstance();
+	$xoopsPreload = XoopsPreload::getInstance();
 	$xoopsPreload->triggerEvent('api.server.end');
 	exit(0);
 	

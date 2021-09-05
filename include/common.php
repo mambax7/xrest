@@ -39,9 +39,9 @@ function user_uid($username, $password){
 function checkright($function_file, $username, $password){
 	$uid = user_uid($username,$password);
 	$module_handler = xoops_getHandler('module');
-	$gperm_handler =& xoops_getHandler('groupperm');
-	$member_handler =& xoops_getHandler('member');
-	$online_handler =& xoops_getHandler('online');
+	$gperm_handler = xoops_getHandler('groupperm');
+	$member_handler = xoops_getHandler('member');
+	$online_handler = xoops_getHandler('online');
 
 	$GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
 	$GLOBALS['xrestPlugin']['user'] = $username;
@@ -58,14 +58,14 @@ function checkright($function_file, $username, $password){
 		@ini_set( 'session.gc_maxlifetime', $xoopsConfig['session_expire'] * 60 );
 		session_set_save_handler([&$sess_handler, 'open'], [&$sess_handler, 'close'], [&$sess_handler, 'read'], [&$sess_handler, 'write'], [&$sess_handler, 'destroy'], [&$sess_handler, 'gc']);
 		session_start();
-		$_SESSION['xoopsUserId'] = $uid;
-		$GLOBALS['xoopsUser'] = &$member_handler->getUser( $uid );
+		$_SESSION['xoopsUserId']     = $uid;
+		$GLOBALS['xoopsUser']        = $member_handler->getUser($uid );
 		$_SESSION['xoopsUserGroups'] = $GLOBALS['xoopsUser']->getGroups();
 		$GLOBALS['sess_handler']->update_cookie();
 		return $gperm_handler->checkRight('plugin_call',$item_id,$groups, $modid);
 	} else {
-		$gperm_handler =& xoops_getHandler('groupperm');
-		$groups = [XOOPS_GROUP_ANONYMOUS];
+		$gperm_handler = xoops_getHandler('groupperm');
+		$groups        = [XOOPS_GROUP_ANONYMOUS];
 		return $gperm_handler->checkRight('plugin_call',$item_id,$groups, $modid);
 	}
 }

@@ -53,7 +53,7 @@
 	$GLOBALS['xrestImageAdmin'] = XOOPS_URL .'/'. $GLOBALS['xrestModule']->getInfo('icons32');
 	
 	if ($GLOBALS['xoopsUser']) {
-	    $moduleperm_handler =& xoops_getHandler('groupperm');
+	    $moduleperm_handler = xoops_getHandler('groupperm');
 	    if (!$moduleperm_handler->checkRight('module_admin', $GLOBALS['xrestModule']->getVar( 'mid' ), $GLOBALS['xoopsUser']->getGroups())) {
 	        redirect_header(XOOPS_URL, 1, _NOPERM);
 	        exit();
