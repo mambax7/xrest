@@ -27,7 +27,7 @@ class XrestCorePreload extends XoopsPreloadItem
             $result          = [];
             $result['when']  = microtime(true);
             $result['files'] = 0;
-            foreach (XrestCorePreload::getFileListAsArray(XOOPS_VAR_PATH . '/caches/xoops_cache/', 'xrest') as $id => $file) {
+            foreach (self::getFileListAsArray(XOOPS_VAR_PATH . '/caches/xoops_cache/', 'xrest') as $id => $file) {
                 $result['files']++;
                 @unlink(XOOPS_VAR_PATH . '/caches/xoops_data/' . $file);
             }
