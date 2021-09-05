@@ -60,7 +60,7 @@
 				$other = 1;
 			}
 			
-			if ($fieldinfo->getVar('Key') == 'PRI'){
+			if ('PRI' == $fieldinfo->getVar('Key')){
 				$key = 1;
 			}
 			
@@ -84,29 +84,29 @@
 				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_FIELD, intval($field) . '[visible]', $table->getVar('visible'));
 				$crc[$field] = new XoopsFormRadioYN(_XREST_FRM_CRC_FIELD, intval($field) . '[crc]');
 	
-				if ($key==1) 
+				if (1 == $key)
 					$post[$field]->setExtra('disabled="disabled"');
-				elseif ($table->getVar('allowpost')==true)
+				elseif (true == $table->getVar('allowpost'))
 					$post[$field]->setValue(1);			
 				$ele_tray[$field]->addElement($post[$field]);
 														
-				if ($table->getVar('allowretrieve')==true)
+				if (true == $table->getVar('allowretrieve'))
 					$retrieve[$field]->setValue(1);
 				$ele_tray[$field]->addElement($retrieve[$field]);
 				
-				if ($key==1) 
+				if (1 == $key)
 					$update[$field]->setExtra('disabled="disabled"');
-				elseif ($table->getVar('allowupdate')==true)
+				elseif (true == $table->getVar('allowupdate'))
 					$update[$field]->setValue(1);			
 				$ele_tray[$field]->addElement($update[$field]);
 	
-				if ($table->getVar('visible')==true)
+				if (true == $table->getVar('visible'))
 					$visible[$field]->setValue(1);
 				$ele_tray[$field]->addElement($visible[$field]);
 	
-				if ($key==1) 
+				if (1 == $key)
 					$crc[$field]->setExtra('disabled="disabled"');
-				elseif ($table->getVar('crc')==true)
+				elseif (true == $table->getVar('crc'))
 					$crc[$field]->setValue(1);			
 				$ele_tray[$field]->addElement($crc[$field]);
 				
@@ -128,19 +128,19 @@
 				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_FIELD, intval($field) . '[visible]', $fielddata->getVar('visible'));
 				$crc[$field] = new XoopsFormRadioYN(_XREST_FRM_CRC_FIELD, intval($field) . '[crc]', $fielddata->getVar('crc'));
 	
-				if ($key==1) 
+				if (1 == $key)
 					$post[$field]->setExtra('disabled="disabled"');
 				$ele_tray[$field]->addElement($post[$field]);
 														
 				$ele_tray[$field]->addElement($retrieve[$field]);
 				
-				if ($key==1) 
+				if (1 == $key)
 					$update[$field]->setExtra('disabled="disabled"');
 				$ele_tray[$field]->addElement($update[$field]);
 	
 				$ele_tray[$field]->addElement($visible[$field]);
 	
-				if ($key==1) 
+				if (1 == $key)
 					$crc[$field]->setExtra('disabled="disabled"');
 	
 				$ele_tray[$field]->addElement($crc[$field]);

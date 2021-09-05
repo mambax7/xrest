@@ -40,7 +40,7 @@ case 'dashboard':
 		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_EXECUTION . '</label>', $lastplugin['execution'], 'Green');
 	}
 	$lastcleanup = XoopsCache::read('xrest_cleanup_last');
-	if (sizeof($lastcleanup)==3) {
+	if (3 == sizeof($lastcleanup)) {
 		$indexAdmin->addInfoBox(_XREST_AM_XREST_CLEANUPANDDATE);
 		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, '<label>' . _XREST_AM_XREST_LAST_CLEANUP_WHEN . '</label>', date(_DATESTRING, $lastcleanup['when']), 'Purple');
 		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, '<label>' . _XREST_AM_XREST_LAST_CLEANUP_FILES . '</label>', $lastcleanup['files'], 'Purple');

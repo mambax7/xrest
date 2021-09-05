@@ -23,9 +23,9 @@ $GLOBALS['xrestPlugin'] = $plugin;
 
 // Gets URI Values and POST and GET Values
 $path = parse_url(XOOPS_URL.$_SERVER['REQUEST_URI'], PHP_URL_PATH);
-if (substr($path,0,1)!='\\')
+if ('\\' != substr($path, 0, 1))
 	$path .= '\\' .$path;
-if (substr($path,strlen($path)-1,1)!='\\')
+if ('\\' != substr($path, strlen($path) - 1, 1))
 	$path .= $path . '\\';
 $request = parse_url(XOOPS_URL.$_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 $values = [];
@@ -59,9 +59,9 @@ switch($mode) {
 		
 		// Intialises SOAP Object
 		if (function_exists($wsdlfunc))
-			if ($GLOBALS['xrestModuleConfig']['wsdl']==1 && $wsdlfunc()==true){
+			if (1 == $GLOBALS['xrestModuleConfig']['wsdl'] && true == $wsdlfunc()){
 				if (function_exists($wsdlservicefunc)) {
-					if ($wsdlservicefunc()==false) {
+					if (false == $wsdlservicefunc()) {
 						$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . 'http.wsdl', ['uri' => XOOPS_URL . $path]);
 					} else {
 						$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . $plugin . '.service', ['uri' => XOOPS_URL . $path]);
@@ -143,7 +143,7 @@ switch($mode) {
 				require_once($GLOBALS['xoops']->path('modules/xrest/plugins/'.$pluginObj->getVar('plugin_file')));
 				
 				// Checks for Cached Result
-				if ((!$result = XoopsCache::read('xrest_results_'.$plugin.'_'.md5(implode(':',$values))))&&$pluginObj->getVar('active')==true) {
+				if ((!$result = XoopsCache::read('xrest_results_'.$plugin.'_'.md5(implode(':',$values)))) && true == $pluginObj->getVar('active')) {
 					$result = [];
 					$opfunc = $plugin;
 					if (function_exists($plugin . '_xsd_rest'))

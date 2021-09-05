@@ -46,13 +46,13 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
 	private function getDirListAsArray( $dirname ) {
 		$ignored = [];
 		$list = [];
-		if ( substr( $dirname, -1 ) != '/' ) {
+		if ('/' != substr($dirname, -1 )) {
 			$dirname .= '/';
 		}
 		$u=0;
 		if ( $handle = opendir( $dirname ) ) {
 			while ( $file = readdir( $handle ) ) {
-				if ( substr( $file, 0, 1 ) == '.' || in_array( strtolower( $file ), $ignored ) )	continue;
+				if ('.' == substr($file, 0, 1 ) || in_array(strtolower($file ), $ignored ) )	continue;
 				if ( is_dir( $dirname . $file ) ) {
 					$list[$u++] = $file;
 				}
@@ -68,7 +68,7 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
 	private function getFileListAsArray($dirname, $prefix= '', $extension = '.php' )
 	{
 		$filelist = [];
-		if (substr($dirname, -1) == '/') {
+		if ('/' == substr($dirname, -1)) {
 			$dirname = substr($dirname, 0, -1);
 		}
 		$u=0;
@@ -78,7 +78,7 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
 					$file = $prefix.$file;$extension;
 					if (strtolower(substr($file, strlen($file) - strlen($extension), strlen($extension)))==strtolower($extension)) {
 						$filelist[$u++] = $file;
-					} elseif ($extension == '*.*') {
+					} elseif ('*.*' == $extension) {
 						$filelist[$u++] = $file;
 					}
 				}
@@ -92,7 +92,7 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
 	
     public function getPluginWithName($plugin_name) {
     	$criteria = new CriteriaCompo(new Criteria('`plugin_name`', $plugin_name));
-    	if ($this->getCount($criteria)==0) {
+    	if (0 == $this->getCount($criteria)) {
     		return false;
     	} elseif ($objects = $this->getObjects($criteria, false)) {
     		if (isset($objects[0]))
@@ -105,7 +105,7 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
     
 	public function getPluginWithFile($plugin_file) {
     	$criteria = new CriteriaCompo(new Criteria('`plugin_file`', $plugin_file));
-    	if ($this->getCount($criteria)==0) {
+    	if (0 == $this->getCount($criteria)) {
     		return false;
     	} elseif ($objects = $this->getObjects($criteria, false)) {
     		if (isset($objects[0]))

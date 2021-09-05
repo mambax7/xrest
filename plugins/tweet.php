@@ -11,7 +11,7 @@
 	
 		global $xoopsModuleConfig, $xoopsConfig;
 	
-		if ($xoopsModuleConfig['site_user_auth']==1){
+		if (1 == $xoopsModuleConfig['site_user_auth']){
 			if ($ret = check_for_lock(basename(__FILE__),$username,$password)) { return $ret; }
 			if (!checkright(basename(__FILE__),$username,$password)) {
 				mark_for_lock(basename(__FILE__),$username,$password);

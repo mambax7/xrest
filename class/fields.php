@@ -81,7 +81,7 @@ class XrestFieldsHandler extends XoopsPersistableObjectHandler
     public function getFieldWithNameAndTableID($fieldname, $tbl_id) {
     	$criteria = new CriteriaCompo(new Criteria('`fieldname`', $fieldname));
     	$criteria->add(new Criteria('`tbl_id`', $tbl_id));
-    	if ($this->getCount($criteria)==0) {
+    	if (0 == $this->getCount($criteria)) {
     		return false;
     	} elseif ($objects = $this->getObjects($criteria, false)) {
     		if (isset($objects[0]))

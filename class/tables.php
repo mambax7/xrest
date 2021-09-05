@@ -82,7 +82,7 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
         $ret    = [];
         $i      = 1;
         while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
-            if ($row['Comment'] != 'VIEW' && $row['Comment'] != 'TRIGGER' && $row['Comment'] != 'STORE PROCEEDURE') {
+            if ('VIEW' != $row['Comment'] && 'TRIGGER' != $row['Comment'] && 'STORE PROCEEDURE' != $row['Comment']) {
                 $ret[$i] = new XrestMysqlTables();
                 $ret[$i]->assignVars($row);
                 $i++;
@@ -98,7 +98,7 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
         $ret    = [];
         $i      = 1;
         while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
-            if ($row['Comment'] == 'VIEW') {
+            if ('VIEW' == $row['Comment']) {
                 $ret[$i] = new XrestMysqlTables();
                 $ret[$i]->assignVars($row);
                 $i++;
@@ -111,7 +111,7 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
     {
         $criteria = new CriteriaCompo(new Criteria('`tablename`', $tablename));
         $criteria->add(new Criteria('`view`', $view));
-        if ($this->getCount($criteria) == 0) {
+        if (0 == $this->getCount($criteria)) {
             return false;
         } elseif ($objects = $this->getObjects($criteria, false)) {
             if (isset($objects[0])) {

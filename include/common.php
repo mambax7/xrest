@@ -15,7 +15,7 @@ function obj2array($objects) {
 
 function validateuser($username, $password){
 	global $xoopsDB;
-	$sql = 'select * from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password?"'$password'":"md5('$password')");
+	$sql = 'select * from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (32 == strlen($password) && strtolower($password) == $password?"'$password'":"md5('$password')");
 	$ret = $xoopsDB->query($sql);
 	if (!$xoopsDB->getRowsNum($ret)) {
 		return false;
@@ -26,7 +26,7 @@ function validateuser($username, $password){
 
 function user_uid($username, $password){
 	global $xoopsDB;
-	$sql = 'select uid from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password?"'$password'":"md5('$password')");
+	$sql = 'select uid from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (32 == strlen($password) && strtolower($password) == $password?"'$password'":"md5('$password')");
 	$ret = $xoopsDB->query($sql);
 	if (!$xoopsDB->getRowsNum($ret)) {
 		return false;
@@ -51,7 +51,7 @@ function checkright($function_file, $username, $password){
 	$item_id = $plugin->getVar('plugin_id');
 	$modid = $GLOBALS['xrestModule']->getVar('mid');
 	
-	if ($uid <> 0){
+	if (0 <> $uid){
 		$rUser = new XoopsUser($uid);
 		$groups = is_object($rUser) ? $rUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 		$online_handler->write($uid, $username, time(), $modid, (string)$_SERVER['REMOTE_ADDR']);
@@ -73,7 +73,7 @@ function checkright($function_file, $username, $password){
 if (!function_exists('xrest_isIPv6')) {
 	function xrest_isIPv6($ip = '')
 	{  
-		if ($ip == '')
+		if ('' == $ip)
 			return false; 
 			 
 		if (substr_count($ip, ':') > 0){
@@ -96,7 +96,7 @@ if (!function_exists('xrest_getUserIP')) {
 		} 
 		$ret['sessionid'] = session_id(); 
 		if (!$ip) { 
-			if ($_SERVER['HTTP_X_FORWARDED_FOR'] != ''){
+			if ('' != $_SERVER['HTTP_X_FORWARDED_FOR']){
 				$ip = (string)$_SERVER['HTTP_X_FORWARDED_FOR'];
 				$ret['is_proxied'] = true; 
 				$proxy_ip = $_SERVER['REMOTE_ADDR'];
