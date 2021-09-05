@@ -34,7 +34,7 @@ if (!function_exists('xrest_toXml')) {
                     $nested--;
                     $output .= str_repeat("\t", (1 * $nested)) . '</' . (is_string($key) ? $key : $name . '_' . $key) . '>' . "\n";
                 } else {
-                    if (strlen($value) > 0) {
+                    if ('' != $value) {
                         $nested++;
                         $output .= str_repeat("\t", (1 * $nested)) . '  <' . (is_string($key) ? $key : $name . '_' . $key) . '>' . trim($value) . '</' . (is_string($key) ? $key : $name . '_' . $key) . '>' . "\n";
                         $nested--;
@@ -42,7 +42,7 @@ if (!function_exists('xrest_toXml')) {
                 }
                 $nested--;
             }
-        } elseif (strlen($array) > 0) {
+        } elseif ('' != $array) {
             $nested++;
             $output .= str_repeat("\t", (1 * $nested)) . trim($array) . "\n";
             $nested--;
