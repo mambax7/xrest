@@ -429,7 +429,7 @@ class Services_JSON
                 return '{' . join(',', $properties) . '}';
 
             default:
-                return ($this->use & SERVICES_JSON_SUPPRESS_ERRORS) ? 'null' : new Services_JSON_Error(gettype($var) . " can not be encoded as JSON string");
+                return ($this->use & SERVICES_JSON_SUPPRESS_ERRORS) ? 'null' : new Services_JSON_Error(gettype($var) . ' can not be encoded as JSON string');
         }
     }
 

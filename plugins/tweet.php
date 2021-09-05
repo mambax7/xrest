@@ -15,7 +15,7 @@
 			if ($ret = check_for_lock(basename(__FILE__),$username,$password)) { return $ret; }
 			if (!checkright(basename(__FILE__),$username,$password)) {
 				mark_for_lock(basename(__FILE__),$username,$password);
-				return ['ErrNum' => 9, "ErrDesc" => 'No Permission for plug-in'];
+				return ['ErrNum' => 9, 'ErrDesc' => 'No Permission for plug-in'];
 			}
 		}
 	
@@ -67,7 +67,7 @@
 		if ($id = $oauth->sendTweet($schedule->getVar('pre').' '.$tweet, $link, true)) {
 			if ($GLOBALS['twitterbombModuleConfig']['tags']) {
 				$tag_handler = xoops_getModuleHandler('tag', 'tag');
-				$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $schedule->getVar('catid'));
+				$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet), $lid, $GLOBALS['twitterbombModule']->getVar('dirname'), $schedule->getVar('catid'));
 			}
 			$log->setVar('id', $id);
 			$log->setVar('alias', $nick);
@@ -103,20 +103,20 @@
 	function tweet_xsd_rest($parser){
 		$xsd = [];
 		$i=0;
-		$xsd['request'][$i++] = ["name" => "username", "type" => "string"];
-		$xsd['request'][$i++] = ["name" => "password", "type" => "string"];
+		$xsd['request'][$i++] = ['name' => 'username', 'type' => 'string'];
+		$xsd['request'][$i++] = ['name' => 'password', 'type' => 'string'];
 		$xsd['request'][$i++] = [
-            "name" => "nick", "items" => [
-                ["name" => "password", "type" => "string"],
-                ["name" => "password", "type" => "string"]
+            'name' => 'nick', 'items' => [
+                ['name' => 'password', 'type' => 'string'],
+                ['name' => 'password', 'type' => 'string']
             ]
         ];
-		$xsd['request'][$i++] = ["name" => "message", "type" => "string"];
+		$xsd['request'][$i++] = ['name' => 'message', 'type' => 'string'];
 	
 		$i=0;
-		$xsd['response'][$i++] = ["name" => "ERRNUM", "type" => "integer"];
-		$xsd['response'][$i++] = ["name" => "RESULT", "type" => "string"];
-		$xsd['response'][$i++] = ["name" => "CODE", "type" => "string"];
+		$xsd['response'][$i++] = ['name' => 'ERRNUM', 'type' => 'integer'];
+		$xsd['response'][$i++] = ['name' => 'RESULT', 'type' => 'string'];
+		$xsd['response'][$i++] = ['name' => 'CODE', 'type' => 'string'];
 	
 		return $xsd;
 	}
@@ -127,15 +127,15 @@
 	function tweet_xsd_soap($parser){
 		$xsd = [];
 		$i=0;
-		$xsd['request'][$i++] = ["name" => "username", "type" => "string"];
-		$xsd['request'][$i++] = ["name" => "password", "type" => "string"];
-		$xsd['request'][$i++] = ["name" => "nick", "type" => "string"];
-		$xsd['request'][$i++] = ["name" => "message", "type" => "string"];
+		$xsd['request'][$i++] = ['name' => 'username', 'type' => 'string'];
+		$xsd['request'][$i++] = ['name' => 'password', 'type' => 'string'];
+		$xsd['request'][$i++] = ['name' => 'nick', 'type' => 'string'];
+		$xsd['request'][$i++] = ['name' => 'message', 'type' => 'string'];
 				
 		$i=0;
-		$xsd['response'][$i++] = ["name" => "ERRNUM", "type" => "integer"];
-		$xsd['response'][$i++] = ["name" => "RESULT", "type" => "string"];
-		$xsd['response'][$i++] = ["name" => "CODE", "type" => "string"];
+		$xsd['response'][$i++] = ['name' => 'ERRNUM', 'type' => 'integer'];
+		$xsd['response'][$i++] = ['name' => 'RESULT', 'type' => 'string'];
+		$xsd['response'][$i++] = ['name' => 'CODE', 'type' => 'string'];
 				
 		return $xsd;
 	}

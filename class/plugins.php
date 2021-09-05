@@ -36,7 +36,7 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
     public function __construct($db)
     {
 		$this->db = $db;
-        parent::__construct($db, 'rest_plugins', 'XrestPlugins', "plugin_id", "plugin_name");
+        parent::__construct($db, 'rest_plugins', 'XrestPlugins', 'plugin_id', 'plugin_name');
     }
     
 	public function getServerExtensions() {
@@ -65,7 +65,7 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
 		return $list;
 	}
 
-	private function getFileListAsArray($dirname, $prefix="", $extension = '.php' )
+	private function getFileListAsArray($dirname, $prefix= '', $extension = '.php' )
 	{
 		$filelist = [];
 		if (substr($dirname, -1) == '/') {

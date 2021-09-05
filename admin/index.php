@@ -6,7 +6,7 @@ $tbl_id = (isset($_REQUEST['tbl_id'])?$_REQUEST['tbl_id']:0);
     
 switch ($op){
 default:
-case "dashboard":
+case 'dashboard':
 	
 	xoops_load('xoopscache');
 	xoops_cp_header();
@@ -20,36 +20,36 @@ case "dashboard":
 
 	$indexAdmin = new ModuleAdmin();	
     $indexAdmin->addInfoBox(_XREST_AM_XREST_SUMANDTOTAL);
-    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_TOTAL_PLUGINS."</label>", $plugins_handler->getCount(), ($plugins_handler->getCount()>0?'Green':'Red'));
-    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_TOTAL_ACTIVE_PLUGINS."</label>", $plugins_handler->getCount(new Criteria('`active`', '1','=')), ($plugins_handler->getCount(new Criteria('`active`', '1','='))>0?'Green':'Red'));
-    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_TOTAL_INACTIVE_PLUGINS."</label>", $plugins_handler->getCount(new Criteria('`active`', '0','=')), ($plugins_handler->getCount(new Criteria('`active`', '0','='))>0?'Green':'Red'));
-    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_TOTAL_FAILED_PLUGINS."</label>", intval(XoopsCache::read('xrest_plugins_failed')), (intval(XoopsCache::read('xrest_plugins_failed'))>0?'Red':'Green'));
-	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_TOTAL_TABLES."</label>", $tables_handler->getCount(new Criteria('`view`', '0','=')), ($tables_handler->getCount(new Criteria('`view`', '0','='))>0?'Green':'Red'));
-	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_TOTAL_VIEWS."</label>", $tables_handler->getCount(new Criteria('`view`', '1','=')), ($tables_handler->getCount(new Criteria('`view`', '1','='))>0?'Green':'Red'));
-	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_TOTAL_FIELDS."</label>", $fields_handler->getCount(), ($tables_handler->getCount()>0?'Green':'Red'));
-	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, "<label>"._XREST_AM_XREST_AVERAGE_FIELDS."</label>", number_format(($fields_handler->getCount()+1)/($tables_handler->getCount(new Criteria('`view`', '0','='))+1),2), (number_format(($fields_handler->getCount()+1)/($tables_handler->getCount(new Criteria('`view`', '0','='))+1),2)>0?'Green':'Red'));
+    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_PLUGINS . '</label>', $plugins_handler->getCount(), ($plugins_handler->getCount() > 0?'Green':'Red'));
+    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_ACTIVE_PLUGINS . '</label>', $plugins_handler->getCount(new Criteria('`active`', '1', '=')), ($plugins_handler->getCount(new Criteria('`active`', '1', '=')) > 0?'Green':'Red'));
+    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_INACTIVE_PLUGINS . '</label>', $plugins_handler->getCount(new Criteria('`active`', '0', '=')), ($plugins_handler->getCount(new Criteria('`active`', '0', '=')) > 0?'Green':'Red'));
+    $indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_FAILED_PLUGINS . '</label>', intval(XoopsCache::read('xrest_plugins_failed')), (intval(XoopsCache::read('xrest_plugins_failed')) > 0?'Red':'Green'));
+	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_TABLES . '</label>', $tables_handler->getCount(new Criteria('`view`', '0', '=')), ($tables_handler->getCount(new Criteria('`view`', '0', '=')) > 0?'Green':'Red'));
+	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_VIEWS . '</label>', $tables_handler->getCount(new Criteria('`view`', '1', '=')), ($tables_handler->getCount(new Criteria('`view`', '1', '=')) > 0?'Green':'Red'));
+	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_FIELDS . '</label>', $fields_handler->getCount(), ($tables_handler->getCount() > 0?'Green':'Red'));
+	$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_AVERAGE_FIELDS . '</label>', number_format(($fields_handler->getCount() + 1) / ($tables_handler->getCount(new Criteria('`view`', '0', '=')) + 1), 2), (number_format(($fields_handler->getCount() + 1) / ($tables_handler->getCount(new Criteria('`view`', '0', '=')) + 1), 2) > 0?'Green':'Red'));
 	$lastplugin = XoopsCache::read('xrest_plugins_last');
 	if (sizeof($lastplugin)>=5) {
 		$indexAdmin->addInfoBox(_XREST_AM_XREST_LASTANDDATE);
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, "<label>"._XREST_AM_XREST_LAST_PLUGINS_CALLED."</label>", $lastplugin['plugin'], 'Blue');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_CALLED . '</label>', $lastplugin['plugin'], 'Blue');
 		if (!empty($lastplugin['user']))
-			$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, "<label>"._XREST_AM_XREST_LAST_PLUGINS_CALLEDBY."</label>", $lastplugin['user'], 'Blue');
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, "<label>"._XREST_AM_XREST_LAST_PLUGINS_CALLEDWHEN."</label>", date(_DATESTRING, $lastplugin['when']), 'Blue');
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, "<label>"._XREST_AM_XREST_LAST_PLUGINS_TOOKTOEXECUTE."</label>", $lastplugin['took'], 'Blue');
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, "<label>"._XREST_AM_XREST_LAST_PLUGINS_EXECUTED."</label>", $lastplugin['executed'], 'Green');
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, "<label>"._XREST_AM_XREST_LAST_PLUGINS_EXECUTION."</label>", $lastplugin['execution'], 'Green');
+			$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_CALLEDBY . '</label>', $lastplugin['user'], 'Blue');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_CALLEDWHEN . '</label>', date(_DATESTRING, $lastplugin['when']), 'Blue');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_TOOKTOEXECUTE . '</label>', $lastplugin['took'], 'Blue');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_EXECUTED . '</label>', $lastplugin['executed'], 'Green');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_EXECUTION . '</label>', $lastplugin['execution'], 'Green');
 	}
 	$lastcleanup = XoopsCache::read('xrest_cleanup_last');
 	if (sizeof($lastcleanup)==3) {
 		$indexAdmin->addInfoBox(_XREST_AM_XREST_CLEANUPANDDATE);
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, "<label>"._XREST_AM_XREST_LAST_CLEANUP_WHEN."</label>", date(_DATESTRING, $lastcleanup['when']), 'Purple');
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, "<label>"._XREST_AM_XREST_LAST_CLEANUP_FILES."</label>", $lastcleanup['files'], 'Purple');
-		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, "<label>"._XREST_AM_XREST_LAST_CLEANUP_TOOKTOEXECUTE."</label>", $lastcleanup['took'], 'Purple');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, '<label>' . _XREST_AM_XREST_LAST_CLEANUP_WHEN . '</label>', date(_DATESTRING, $lastcleanup['when']), 'Purple');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, '<label>' . _XREST_AM_XREST_LAST_CLEANUP_FILES . '</label>', $lastcleanup['files'], 'Purple');
+		$indexAdmin->addInfoBoxLine(_XREST_AM_XREST_CLEANUPANDDATE, '<label>' . _XREST_AM_XREST_LAST_CLEANUP_TOOKTOEXECUTE . '</label>', $lastcleanup['took'], 'Purple');
 	}
 	echo $indexAdmin->renderIndex();
 	xoops_cp_footer();
 	break;
-case "about":
+case 'about':
 	xoops_cp_header();
 	loadModuleAdminMenu(6);
 	$indexAdmin = new ModuleAdmin();
@@ -95,7 +95,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
 	echo (substr($about, $iend+1, strlen($about)-$iend-1));
 	xoops_cp_footer();
 	break;
-case "fields":
+case 'fields':
 	
 	if (!$tbl_id)
 		$tbl_id=1;
@@ -111,7 +111,7 @@ case "fields":
 	xoops_cp_footer();
 	break;
 
-case "views":
+case 'views':
 
 	xoops_cp_header();
 	loadModuleAdminMenu(3);
@@ -122,7 +122,7 @@ case "views":
 	xoops_cp_footer();
 	break;		
 
-case "plugins":
+case 'plugins':
 	
 	xoops_cp_header();
 	loadModuleAdminMenu(4);
@@ -133,7 +133,7 @@ case "plugins":
 	xoops_cp_footer();
 	break;	
 
-case "tables":
+case 'tables':
 	
 	xoops_cp_header();
 	loadModuleAdminMenu(1);
@@ -145,11 +145,11 @@ case "tables":
 	break;	
 	
 	
-case "savefields":
+case 'savefields':
 	$fields_handler = xoops_getModuleHandler('fields', 'xrest');
 	foreach ($_POST['id'] as $id => $fld_id){
 		switch ($fld_id){
-		case "new":
+		case 'new':
 			$field = $fields_handler->create();
 			$field->setVars($_POST[$id]);
 			$field->setVar('tbl_id', $_POST['tbl_id']);
@@ -161,15 +161,15 @@ case "savefields":
 			$fields_handler->insert($field);
 		}
 	}
-	redirect_header("index.php?op=fields&tbl_id=".$tbl_id,2,_XREST_AM_MSG_SAVEFIELDS_DATABASE_UPDATED);
+	redirect_header('index.php?op=fields&tbl_id=' . $tbl_id, 2, _XREST_AM_MSG_SAVEFIELDS_DATABASE_UPDATED);
 	break;
 	
-case "savetables":
+case 'savetables':
 
 	$tables_handler = xoops_getModuleHandler('tables', 'xrest');
 	foreach ($_POST['id'] as $id => $tbl_id){
 		switch ($tbl_id){
-		case "new":
+		case 'new':
 			$table = $tables_handler->create();
 			$table->setVars($_POST[$id]);
 			$tables_handler->insert($table);
@@ -180,14 +180,14 @@ case "savetables":
 			$tables_handler->insert($table);
 		}
 	}
-	redirect_header("index.php?op=tables",2,_XREST_AM_MSG_SAVETABLES_DATABASE_UPDATED);
+	redirect_header('index.php?op=tables', 2, _XREST_AM_MSG_SAVETABLES_DATABASE_UPDATED);
 	break;
-case "saveviews":
+case 'saveviews':
 
 	$tables_handler = xoops_getModuleHandler('tables', 'xrest');
 	foreach ($_POST['id'] as $id => $tbl_id){
 		switch ($tbl_id){
-		case "new":
+		case 'new':
 			$table = $tables_handler->create();
 			$table->setVars($_POST[$id]);
 			$table->setVar('view', true);
@@ -199,15 +199,15 @@ case "saveviews":
 			$tables_handler->insert($table);
 		}
 	}
-	redirect_header("index.php?op=views",2,_XREST_AM_MSG_SAVEVIEWS_DATABASE_UPDATED);
+	redirect_header('index.php?op=views', 2, _XREST_AM_MSG_SAVEVIEWS_DATABASE_UPDATED);
 	break;
 
-case "saveplugins":
+case 'saveplugins':
 	
 	$plugins_handler = xoops_getModuleHandler('plugins', 'xrest');
 	foreach ($_POST['id'] as $id => $plugin_id){
 		switch ($plugin_id){
-		case "new":
+		case 'new':
 			$plugin = $plugins_handler->create();
 			$plugin->setVars($_POST[$id]);
 			$plugins_handler->insert($plugin);
@@ -218,7 +218,7 @@ case "saveplugins":
 			$plugins_handler->insert($plugin);
 		}
 	}
-	redirect_header("index.php?op=plugins",2,_XREST_AM_MSG_SAVEPLUGINS_DATABASE_UPDATED);
+	redirect_header('index.php?op=plugins', 2, _XREST_AM_MSG_SAVEPLUGINS_DATABASE_UPDATED);
 	break;
 
 }

@@ -84,7 +84,7 @@ switch($mode) {
 	case 'wsdl':
 		
 		if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
-			include_once(XOOPS_ROOT_PATH."/class/template.php");
+			include_once(XOOPS_ROOT_PATH . '/class/template.php');
 			$GLOBALS['xoopsTpl'] = new XoopsTpl();
 		}
 		
@@ -165,25 +165,25 @@ switch($mode) {
 							} elseif (!empty($field['name'])&&!empty($field['type'])) {
 								switch($field['type']) {
 								default:
-								case "string":
+								case 'string':
 									$tmp[$fields] = (string)$values[$field['name']];
 									break;
-								case "integer":
+								case 'integer':
 									$tmp[$fields] = (integer)$values[$field['name']];					
 									break;
-								case "array":
+								case 'array':
 									$tmp[$fields] = (array)$values[$field['name']];
 									break;
-								case "object":
+								case 'object':
 									$tmp[$fields] = (object)$values[$field['name']];
 									break;
-								case "boolean":
+								case 'boolean':
 									$tmp[$fields] = (boolean)$values[$field['name']];
 									break;
-								case "float":
+								case 'float':
 									$tmp[$fields] = (float)$values[$field['name']];
 									break;
-								case "double":
+								case 'double':
 									$tmp[$fields] = (double)$values[$field['name']];
 									break;
 								}

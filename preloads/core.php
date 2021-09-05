@@ -36,7 +36,7 @@ class XrestCorePreload extends XoopsPreloadItem
         }
     }
 
-    public function getFileListAsArray($dirname, $prefix = "xrest")
+    public function getFileListAsArray($dirname, $prefix = 'xrest')
     {
         $filelist = [];
         if (substr($dirname, -1) == '/') {

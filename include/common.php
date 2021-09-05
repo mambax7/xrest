@@ -15,7 +15,7 @@ function obj2array($objects) {
 
 function validateuser($username, $password){
 	global $xoopsDB;
-	$sql = "select * from ".$xoopsDB->prefix('users'). " WHERE uname = '$username' and pass = ".(strlen($password)==32&&strtolower($password)==$password?"'$password'":"md5('$password')");
+	$sql = 'select * from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password?"'$password'":"md5('$password')");
 	$ret = $xoopsDB->query($sql);
 	if (!$xoopsDB->getRowsNum($ret)) {
 		return false;
@@ -26,7 +26,7 @@ function validateuser($username, $password){
 
 function user_uid($username, $password){
 	global $xoopsDB;
-	$sql = "select uid from ".$xoopsDB->prefix('users'). " WHERE uname = '$username' and pass = ".(strlen($password)==32&&strtolower($password)==$password?"'$password'":"md5('$password')");
+	$sql = 'select uid from ' . $xoopsDB->prefix('users') . " WHERE uname = '$username' and pass = " . (strlen($password) == 32 && strtolower($password) == $password?"'$password'":"md5('$password')");
 	$ret = $xoopsDB->query($sql);
 	if (!$xoopsDB->getRowsNum($ret)) {
 		return false;
@@ -54,7 +54,7 @@ function checkright($function_file, $username, $password){
 	if ($uid <> 0){
 		$rUser = new XoopsUser($uid);
 		$groups = is_object($rUser) ? $rUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
-		$online_handler->write($uid, $username, time(), $modid, (string)$_SERVER["REMOTE_ADDR"]);
+		$online_handler->write($uid, $username, time(), $modid, (string)$_SERVER['REMOTE_ADDR']);
 		@ini_set( 'session.gc_maxlifetime', $xoopsConfig['session_expire'] * 60 );
 		session_set_save_handler([&$sess_handler, 'open'], [&$sess_handler, 'close'], [&$sess_handler, 'read'], [&$sess_handler, 'write'], [&$sess_handler, 'destroy'], [&$sess_handler, 'gc']);
 		session_start();
@@ -71,12 +71,12 @@ function checkright($function_file, $username, $password){
 }
 
 if (!function_exists('xrest_isIPv6')) {
-	function xrest_isIPv6($ip = "")  
+	function xrest_isIPv6($ip = '')
 	{  
-		if ($ip == "")  
+		if ($ip == '')
 			return false; 
 			 
-		if (substr_count($ip,":") > 0){  
+		if (substr_count($ip, ':') > 0){
 			return true;  
 		} else {  
 			return false;  
@@ -96,10 +96,10 @@ if (!function_exists('xrest_getUserIP')) {
 		} 
 		$ret['sessionid'] = session_id(); 
 		if (!$ip) { 
-			if ($_SERVER["HTTP_X_FORWARDED_FOR"] != ""){  
-				$ip = (string)$_SERVER["HTTP_X_FORWARDED_FOR"];  
+			if ($_SERVER['HTTP_X_FORWARDED_FOR'] != ''){
+				$ip = (string)$_SERVER['HTTP_X_FORWARDED_FOR'];
 				$ret['is_proxied'] = true; 
-				$proxy_ip = $_SERVER["REMOTE_ADDR"];  
+				$proxy_ip = $_SERVER['REMOTE_ADDR'];
 				$ret['network-addy'] = @gethostbyaddr($ip);  
 				$ret['long'] = @ip2long($ip); 
 				if (xrest_isIPv6($ip)) {
@@ -111,7 +111,7 @@ if (!function_exists('xrest_getUserIP')) {
 				} 
 			}else{  
 				$ret['is_proxied'] = false; 
-				$ip = (string)$_SERVER["REMOTE_ADDR"];  
+				$ip = (string)$_SERVER['REMOTE_ADDR'];
 				$ret['network-addy'] = @gethostbyaddr($ip);  
 				$ret['long'] = @ip2long($ip); 
 				if (xrest_isIPv6($ip)) {
@@ -147,7 +147,7 @@ function check_for_lock($function_file, $username, $password) {
 				$ret['made']<((time()-$GLOBALS['xrestModuleConfig']['lock_seconds'])+mt_rand(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']))) {
 				unset($result[$id]);
 			} elseif ($ret['md5']==$userip['md5']) {
-				$retn = ['ErrNum' => 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN];
+				$retn = ['ErrNum' => 9, 'ErrDesc' => _XC_MI_NOPERMFORPLUGIN];
 			}
 		}
 		XoopsCache::delete('lock_'.$function_file.'_'.$username);
@@ -162,11 +162,11 @@ function mark_for_lock($function_file, $username, $password) {
 	if ($result = XoopsCache::read('lock_'.$function_file.'_'.$username)) {
 		XoopsCache::delete('lock_'.$function_file.'_'.$username);
 		XoopsCache::write('lock_'.$function_file.'_'.$username, $result, $GLOBALS['xrestModuleConfig']['lock_seconds']+mt_rand(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']));
-		return ['ErrNum' => 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN];
+		return ['ErrNum' => 9, 'ErrDesc' => _XC_MI_NOPERMFORPLUGIN];
 	} else {
 		XoopsCache::delete('lock_'.$function_file.'_'.$username);
 		XoopsCache::write('lock_'.$function_file.'_'.$username, $userip, $GLOBALS['xrestModuleConfig']['lock_seconds']+mt_rand(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']));
-		return ['ErrNum' => 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN];
+		return ['ErrNum' => 9, 'ErrDesc' => _XC_MI_NOPERMFORPLUGIN];
 	}
 }
 ?>

@@ -68,15 +68,15 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
     public function __construct($db)
     {
         $this->db = $db;
-        parent::__construct($db, 'rest_tables', 'XrestTables', "tbl_id", "tablename");
+        parent::__construct($db, 'rest_tables', 'XrestTables', 'tbl_id', 'tablename');
     }
 
     public function getTablesInDatabase($database, $prefix = '')
     {
         if (empty($prefix)) {
-            $sql = "SHOW TABLE STATUS FROM `" . $database . '`';
+            $sql = 'SHOW TABLE STATUS FROM `' . $database . '`';
         } else {
-            $sql = "SHOW TABLE STATUS FROM `" . $database . '` LIKE "' . $prefix . '%"';
+            $sql = 'SHOW TABLE STATUS FROM `' . $database . '` LIKE "' . $prefix . '%"';
         }
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         $ret    = [];
@@ -93,7 +93,7 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
 
     public function getViewsInDatabase($database)
     {
-        $sql    = "SHOW TABLE STATUS FROM `" . $database . '`';
+        $sql    = 'SHOW TABLE STATUS FROM `' . $database . '`';
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         $ret    = [];
         $i      = 1;

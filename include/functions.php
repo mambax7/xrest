@@ -8,12 +8,12 @@ if (!function_exists('json_encode')){
 	}
 }
 
-if (!function_exists("xrest_toXml")) { 
+if (!function_exists('xrest_toXml')) {
 	function xrest_toXml($array, $name, $standalone=false, $beginning=true, $nested) {
 		
 		if ($beginning) {
 			if ($standalone)
-				header("content-type:text/xml;charset="._CHARSET);
+				header('content-type:text/xml;charset=' . _CHARSET);
 			$output .= '<'.'?'.'xml version="1.0" encoding="'._CHARSET.'"'.'?'.'>' . "\n";    
 			$output .= '<' . $name . '>' . "\n";
 			$nested = 0;
@@ -52,7 +52,7 @@ if (!function_exists("xrest_toXml")) {
 	} 
 }
 
-if (!function_exists("xrest_object2array")) {
+if (!function_exists('xrest_object2array')) {
 	function xrest_object2array($object) {
 	  if (is_object($object)) {
 	    foreach ($object as $key => $value) {
@@ -71,9 +71,9 @@ if (!function_exists("xrest_object2array")) {
 	}
 }
 
-if (!function_exists("xrest_strip_prefix")) {
+if (!function_exists('xrest_strip_prefix')) {
 	function xrest_strip_prefix($raw_tablename){
-		return str_replace(XOOPS_DB_PREFIX."_",'',$raw_tablename);
+		return str_replace(XOOPS_DB_PREFIX . '_', '', $raw_tablename);
 	}
 }
 ?>

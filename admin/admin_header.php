@@ -24,9 +24,9 @@
 	include('../../../include/cp_header.php');
 	
 	if (!defined('_CHARSET'))
-		define ("_CHARSET","UTF-8");
+		define ('_CHARSET', 'UTF-8');
 	if (!defined('_CHARSET_ISO'))
-		define ("_CHARSET_ISO","ISO-8859-1");
+		define ('_CHARSET_ISO', 'ISO-8859-1');
 		
 	$GLOBALS['myts'] = MyTextSanitizer::getInstance();
 	
@@ -59,12 +59,12 @@
 	        exit();
 	    }
 	} else {
-	    redirect_header(XOOPS_URL . "/user.php", 1, _NOPERM);
+	    redirect_header(XOOPS_URL . '/user.php', 1, _NOPERM);
 	    exit();
 	}
 	
 	if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
-		include_once(XOOPS_ROOT_PATH."/class/template.php");
+		include_once(XOOPS_ROOT_PATH . '/class/template.php');
 		$GLOBALS['xoopsTpl'] = new XoopsTpl();
 	}
 	
@@ -77,16 +77,16 @@
 	xoops_load('pagenav');	
 	xoops_load('xoopsmultimailer');
 	
-	IF (!@ include_once XOOPS_ROOT_PATH."/Frameworks/art/functions.admin.php"):    
-	function loadModuleAdminMenu($currentoption, $breadcrumb = "")
+	IF (!@ include_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php'):
+	function loadModuleAdminMenu($currentoption, $breadcrumb = '')
 	{
 		if (!$adminmenu = $GLOBALS['xrestModule']->getAdminMenu()) {
 			return false;
 		}
 			
-		$breadcrumb = empty($breadcrumb) ? $adminmenu[$currentoption]["title"] : $breadcrumb;
-		$module_link = XOOPS_URL."/modules/".$GLOBALS['xrestModule']->getVar("dirname")."/";
-		$image_link = XOOPS_URL."/modules/".$GLOBALS['xrestModule']->getVar("dirname")."/images";
+		$breadcrumb = empty($breadcrumb) ? $adminmenu[$currentoption]['title'] : $breadcrumb;
+		$module_link = XOOPS_URL . '/modules/' . $GLOBALS['xrestModule']->getVar('dirname') . '/';
+		$image_link = XOOPS_URL . '/modules/' . $GLOBALS['xrestModule']->getVar('dirname') . '/images';
 		
 		$adminmenu_text ='
 		<style type="text/css">
@@ -111,10 +111,10 @@
 		 <table style="width: 100%; padding: 0; " cellspacing="0">
 			 <tr>
 				 <td style="width: 70%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;">
-					 <a href="../index.php">'.$GLOBALS['xrestModule']->getVar("name").'</a>
+					 <a href="../index.php">'.$GLOBALS['xrestModule']->getVar('name') . '</a>
 				 </td>
 				 <td style="width: 30%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;">
-					 <strong>'.$GLOBALS['xrestModule']->getVar("name").'</strong>&nbsp;'.$breadcrumb.'
+					 <strong>'.$GLOBALS['xrestModule']->getVar('name') . '</strong>&nbsp;' . $breadcrumb . '
 				 </td>
 			 </tr>
 		 </table>
@@ -123,9 +123,9 @@
 		 <ul>
 		';
 		foreach (array_keys($adminmenu) as $key) {
-			$adminmenu_text .= (($currentoption == $key) ? '<li class="current">' : '<li>').'<a href="'.$module_link.$adminmenu[$key]["link"].'"><span>'.$adminmenu[$key]["title"].'</span></a></li>';
+			$adminmenu_text .= (($currentoption == $key) ? '<li class="current">' : '<li>').'<a href="'.$module_link.$adminmenu[$key]['link'] . '"><span>' . $adminmenu[$key]['title'] . '</span></a></li>';
 		}
-		$adminmenu_text .= '<li><a href="'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$GLOBALS['xrestModule']->getVar("mid").'"><span>'._PREFERENCES.'</span></a></li>';
+		$adminmenu_text .= '<li><a href="'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$GLOBALS['xrestModule']->getVar('mid') . '"><span>' . _PREFERENCES . '</span></a></li>';
 		$adminmenu_text .= '
 		 </ul>
 		</div>

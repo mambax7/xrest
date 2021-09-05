@@ -62,11 +62,11 @@ class XrestFieldsHandler extends XoopsPersistableObjectHandler
     public function __construct($db)
     {
 		$this->db = $db;
-        parent::__construct($db, 'rest_fields', 'XrestFields', "fld_id", "fieldname");
+        parent::__construct($db, 'rest_fields', 'XrestFields', 'fld_id', 'fieldname');
     }
     
     public function getFieldFromTable($table) {
-    	$sql = "SHOW FIELDS FROM `".$GLOBALS['xoopsDB']->prefix($table).'`';
+    	$sql = 'SHOW FIELDS FROM `' . $GLOBALS['xoopsDB']->prefix($table) . '`';
 		$result = $GLOBALS['xoopsDB']->queryF($sql);
 		$ret = [];
 		$i=1;
