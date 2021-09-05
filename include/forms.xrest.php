@@ -69,20 +69,20 @@
 			if (!is_object($fielddata)){
 				$new++;
 				$ele_tray[$field] = new XoopsFormElementTray($fieldinfo->getVar('Field')._XREST_FRM_NEW,'&nbsp;',$fieldinfo->getVar('Field'));
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', 'new'));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[key]', $key));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[string]', $string));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[int]', $int));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[float]', $float));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[text]', $text));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[other]', $other));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[fieldname]', $fieldinfo->getVar('Field')));
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', 'new'));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[key]', $key));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[string]', $string));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[int]', $int));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[float]', $float));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[text]', $text));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[other]', $other));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[fieldname]', $fieldinfo->getVar('Field')));
 				
-				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_FIELD, intval($field) . '[allowpost]', $table->getVar('allowpost'));
-				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_FIELD, intval($field) . '[allowretrieve]', $table->getVar('allowretrieve'));
-				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_FIELD, intval($field) . '[allowupdate]', $table->getVar('allowupdate'));
-				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_FIELD, intval($field) . '[visible]', $table->getVar('visible'));
-				$crc[$field] = new XoopsFormRadioYN(_XREST_FRM_CRC_FIELD, intval($field) . '[crc]');
+				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_FIELD, (int)$field . '[allowpost]', $table->getVar('allowpost'));
+				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_FIELD, (int)$field . '[allowretrieve]', $table->getVar('allowretrieve'));
+				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_FIELD, (int)$field . '[allowupdate]', $table->getVar('allowupdate'));
+				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_FIELD, (int)$field . '[visible]', $table->getVar('visible'));
+				$crc[$field] = new XoopsFormRadioYN(_XREST_FRM_CRC_FIELD, (int)$field . '[crc]');
 	
 				if (1 == $key)
 					$post[$field]->setExtra('disabled="disabled"');
@@ -113,20 +113,20 @@
 			} else { 
 				
 				$ele_tray[$field] = new XoopsFormElementTray($fieldinfo->getVar('Field'),'&nbsp;',$fieldinfo->getVar('Field'));
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', $fielddata->getVar('fld_id')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[key]', $key));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[string]', $string));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[int]', $int));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[float]', $float));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[text]', $text));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[other]', $other));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[fieldname]', $fieldinfo->getVar('Field')));
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', $fielddata->getVar('fld_id')));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[key]', $key));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[string]', $string));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[int]', $int));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[float]', $float));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[text]', $text));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[other]', $other));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[fieldname]', $fieldinfo->getVar('Field')));
 						
-				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_FIELD, intval($field) . '[allowpost]', $fielddata->getVar('allowpost'));
-				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_FIELD, intval($field) . '[allowretrieve]', $fielddata->getVar('allowretrieve'));
-				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_FIELD, intval($field) . '[allowupdate]', $fielddata->getVar('allowupdate'));
-				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_FIELD, intval($field) . '[visible]', $fielddata->getVar('visible'));
-				$crc[$field] = new XoopsFormRadioYN(_XREST_FRM_CRC_FIELD, intval($field) . '[crc]', $fielddata->getVar('crc'));
+				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_FIELD, (int)$field . '[allowpost]', $fielddata->getVar('allowpost'));
+				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_FIELD, (int)$field . '[allowretrieve]', $fielddata->getVar('allowretrieve'));
+				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_FIELD, (int)$field . '[allowupdate]', $fielddata->getVar('allowupdate'));
+				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_FIELD, (int)$field . '[visible]', $fielddata->getVar('visible'));
+				$crc[$field] = new XoopsFormRadioYN(_XREST_FRM_CRC_FIELD, (int)$field . '[crc]', $fielddata->getVar('crc'));
 	
 				if (1 == $key)
 					$post[$field]->setExtra('disabled="disabled"');
@@ -172,11 +172,11 @@
 			if (!is_object($table)){
 				$new++;
 				$ele_tray[$field] = new XoopsFormElementTray(xrest_strip_prefix($view->getVar('Name'))._XREST_FRM_NEW,'&nbsp;',xrest_strip_prefix($view->getVar('Name')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', 'new'));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[tablename]', xrest_strip_prefix($view->getVar('Name'))));
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', 'new'));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[tablename]', xrest_strip_prefix($view->getVar('Name'))));
 				
-				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_VIEW, intval($field) . '[allowretrieve]');
-				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_VIEW, intval($field) . '[visible]');
+				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_VIEW, (int)$field . '[allowretrieve]');
+				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_VIEW, (int)$field . '[visible]');
 	
 				$ele_tray[$field]->addElement($visible[$field]);
 				$ele_tray[$field]->addElement($retrieve[$field]);
@@ -184,11 +184,11 @@
 			} else { 
 	
 				$ele_tray[$field] = new XoopsFormElementTray(xrest_strip_prefix($view->getVar('Name')).'','&nbsp;',xrest_strip_prefix($view->getVar('Name')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', $table->getVar('tbl_id')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[tablename]', xrest_strip_prefix($view->getVar('Name'))));
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', $table->getVar('tbl_id')));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[tablename]', xrest_strip_prefix($view->getVar('Name'))));
 				
-				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_VIEW, intval($field) . '[allowretrieve]', $table->getVar('allowretrieve'));
-				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_VIEW, intval($field) . '[visible]', $table->getVar('visible'));
+				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_VIEW, (int)$field . '[allowretrieve]', $table->getVar('allowretrieve'));
+				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_VIEW, (int)$field . '[visible]', $table->getVar('visible'));
 				
 				$ele_tray[$field]->addElement($visible[$field]);
 				$ele_tray[$field]->addElement($retrieve[$field]);
@@ -219,17 +219,17 @@
 			if (!is_object($plugin)){
 				$new++;
 				$ele_tray[$field] = new XoopsFormElementTray($func._XREST_FRM_NEW,'&nbsp;',$func);
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', 'new'));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[plugin_name]', substr($func, 0, strlen($func) - 4)));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[plugin_file]', $func));
-				$active[$field] = new XoopsFormRadioYN(_XREST_FRM_ACTIVE_PLUGIN, intval($field) . '[active]', false);
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', 'new'));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[plugin_name]', substr($func, 0, strlen($func) - 4)));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[plugin_file]', $func));
+				$active[$field] = new XoopsFormRadioYN(_XREST_FRM_ACTIVE_PLUGIN, (int)$field . '[active]', false);
 				$ele_tray[$field]->addElement($active[$field]);
 			} else { 
 				$ele_tray[$field] = new XoopsFormElementTray($func.'','&nbsp;',$func);
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', $plugin->getVar('plugin_id')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[plugin_name]', substr($func, 0, strlen($func) - 4)));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[plugin_file]', $func));
-				$active[$field] = new XoopsFormRadioYN(_XREST_FRM_ACTIVE_PLUGIN, intval($field) . '[active]', $plugin->getVar('active'));
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', $plugin->getVar('plugin_id')));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[plugin_name]', substr($func, 0, strlen($func) - 4)));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[plugin_file]', $func));
+				$active[$field] = new XoopsFormRadioYN(_XREST_FRM_ACTIVE_PLUGIN, (int)$field . '[active]', $plugin->getVar('active'));
 				$ele_tray[$field]->addElement($active[$field]);
 	   		} 
 			$form_plugin->addElement(	$ele_tray[$field] );	 
@@ -258,13 +258,13 @@
 			if (!is_object($tableinfo)){
 				$new++;
 				$ele_tray[$field] = new XoopsFormElementTray(xrest_strip_prefix($table->getVar('Name'))._XREST_FRM_NEW,'&nbsp;',xrest_strip_prefix($table->getVar('Name')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', 'new'));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[tablename]', xrest_strip_prefix($table->getVar('Name'))));
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', 'new'));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[tablename]', xrest_strip_prefix($table->getVar('Name'))));
 				
-				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_TABLE, intval($field) . '[allowpost]', 0);
-				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_TABLE, intval($field) . '[allowretrieve]', 0);
-				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_TABLE, intval($field) . '[allowupdate]', 0);
-				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_TABLE, intval($field) . '[visible]', 0);
+				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_TABLE, (int)$field . '[allowpost]', 0);
+				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_TABLE, (int)$field . '[allowretrieve]', 0);
+				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_TABLE, (int)$field . '[allowupdate]', 0);
+				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_TABLE, (int)$field . '[visible]', 0);
 	
 				$ele_tray[$field]->addElement($post[$field]);
 				$ele_tray[$field]->addElement($retrieve[$field]);
@@ -274,13 +274,13 @@
 			} else {
 			
 				$ele_tray[$field] = new XoopsFormElementTray(xrest_strip_prefix($table->getVar('Name')).'','&nbsp;',xrest_strip_prefix($table->getVar('Name')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . intval($field) . ']', $tableinfo->getVar('tbl_id')));
-				$ele_tray[$field]->addElement(new XoopsFormHidden(intval($field) . '[tablename]', xrest_strip_prefix($table->getVar('Name'))));
+				$ele_tray[$field]->addElement(new XoopsFormHidden('id[' . (int)$field . ']', $tableinfo->getVar('tbl_id')));
+				$ele_tray[$field]->addElement(new XoopsFormHidden((int)$field . '[tablename]', xrest_strip_prefix($table->getVar('Name'))));
 	
-				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_TABLE, intval($field) . '[allowpost]', $tableinfo->getVar('allowpost'));
-				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_TABLE, intval($field) . '[allowretrieve]', $tableinfo->getVar('allowretrieve'));
-				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_TABLE, intval($field) . '[allowupdate]', $tableinfo->getVar('allowupdate'));
-				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_TABLE, intval($field) . '[visible]', $tableinfo->getVar('visible'));
+				$post[$field] = new XoopsFormRadioYN(_XREST_FRM_POST_TABLE, (int)$field . '[allowpost]', $tableinfo->getVar('allowpost'));
+				$retrieve[$field] = new XoopsFormRadioYN(_XREST_FRM_RETRIEVE_TABLE, (int)$field . '[allowretrieve]', $tableinfo->getVar('allowretrieve'));
+				$update[$field] = new XoopsFormRadioYN(_XREST_FRM_UPDATE_TABLE, (int)$field . '[allowupdate]', $tableinfo->getVar('allowupdate'));
+				$visible[$field] = new XoopsFormRadioYN(_XREST_FRM_VISIBLE_TABLE, (int)$field . '[visible]', $tableinfo->getVar('visible'));
 				
 	
 				$ele_tray[$field]->addElement($post[$field]);
