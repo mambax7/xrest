@@ -13,15 +13,13 @@ xoops_load('xoopscache');
  */
 class XrestPlugins extends XoopsObject
 {
-	
-    function XrestPlugins($id = null)
+    public function XrestPlugins($id = null)
     {
         $this->initVar('plugin_id', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('plugin_name', XOBJ_DTYPE_TXTBOX, null, false, 255);
-		$this->initVar('plugin_file', XOBJ_DTYPE_TXTBOX, null, false, 255);
-		$this->initVar('active', XOBJ_DTYPE_INT, null, false);
-	}
-
+        $this->initVar('plugin_name', XOBJ_DTYPE_TXTBOX, null, false, 255);
+        $this->initVar('plugin_file', XOBJ_DTYPE_TXTBOX, null, false, 255);
+        $this->initVar('active', XOBJ_DTYPE_INT, null, false);
+    }
 }
 
 

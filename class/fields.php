@@ -11,25 +11,23 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class XrestFields extends XoopsObject
 {
-	
-    function XrestFields($id = null)
+    public function XrestFields($id = null)
     {
         $this->initVar('fld_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('tbl_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('key', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('fieldname', XOBJ_DTYPE_TXTBOX, null, false, 220);
-		$this->initVar('allowpost', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('allowretrieve', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('allowupdate', XOBJ_DTYPE_INT, null, false);	
-		$this->initVar('visible', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('string', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('int', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('float', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('text', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('other', XOBJ_DTYPE_INT, null, false);
-		$this->initVar('crc', XOBJ_DTYPE_INT, null, false);
-	}
-
+        $this->initVar('fieldname', XOBJ_DTYPE_TXTBOX, null, false, 220);
+        $this->initVar('allowpost', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('allowretrieve', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('allowupdate', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('visible', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('string', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('int', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('float', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('text', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('other', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('crc', XOBJ_DTYPE_INT, null, false);
+    }
 }
 
 /**
@@ -40,17 +38,15 @@ class XrestFields extends XoopsObject
  */
 class XrestMysqlFields extends XoopsObject
 {
-	
-    function XrestMysqlFields()
+    public function XrestMysqlFields()
     {
-		$this->initVar('Field', XOBJ_DTYPE_OTHER, null, false);
-		$this->initVar('Type', XOBJ_DTYPE_OTHER, null, false);
-		$this->initVar('Null', XOBJ_DTYPE_OTHER, null, false);
-		$this->initVar('Key', XOBJ_DTYPE_OTHER, null, false);
-		$this->initVar('Default', XOBJ_DTYPE_OTHER, null, false);
-		$this->initVar('Extra', XOBJ_DTYPE_OTHER, null, false);
-	}
-
+        $this->initVar('Field', XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('Type', XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('Null', XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('Key', XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('Default', XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('Extra', XOBJ_DTYPE_OTHER, null, false);
+    }
 }
 
 /**
