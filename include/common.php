@@ -42,6 +42,7 @@ function user_uid($username, $password)
 
 function checkright($function_file, $username, $password)
 {
+    global $xoopsConfig;
     $uid           = user_uid($username, $password);
     $moduleHandler = xoops_getHandler('module');
     $gpermHandler  = xoops_getHandler('groupperm');
@@ -57,7 +58,7 @@ function checkright($function_file, $username, $password)
     $modid         = $GLOBALS['xrestModule']->getVar('mid');
 
     if (0 <> $uid) {
-        $rUser  = new XoopsUser($uid);
+        $rUser  = new \XoopsUser($uid);
         $groups = is_object($rUser) ? $rUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
         $onlineHandler->write($uid, $username, time(), $modid, $_SERVER['REMOTE_ADDR']);
         @ini_set('session.gc_maxlifetime', $xoopsConfig['session_expire'] * 60);
@@ -155,7 +156,7 @@ function check_for_lock($function_file, $username, $password)
                 || $ret['made'] < ((time() - $GLOBALS['xrestModuleConfig']['lock_seconds']) + random_int(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']))) {
                 unset($result[$id]);
             } elseif ($ret['md5'] == $userip['md5']) {
-                $retn = ['ErrNum' => 9, 'ErrDesc' => _XC_MI_NOPERMFORPLUGIN];
+                $retn = ['ErrNum' => 9, 'ErrDesc' => _XREST_MI_NOPERMFORPLUGIN];
             }
         }
         XoopsCache::delete('lock_' . $function_file . '_' . $username);
@@ -171,11 +172,11 @@ function mark_for_lock($function_file, $username, $password)
     if ($result = XoopsCache::read('lock_' . $function_file . '_' . $username)) {
         XoopsCache::delete('lock_' . $function_file . '_' . $username);
         XoopsCache::write('lock_' . $function_file . '_' . $username, $result, $GLOBALS['xrestModuleConfig']['lock_seconds'] + random_int(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']));
-        return ['ErrNum' => 9, 'ErrDesc' => _XC_MI_NOPERMFORPLUGIN];
+        return ['ErrNum' => 9, 'ErrDesc' => _XREST_MI_NOPERMFORPLUGIN];
     } else {
         XoopsCache::delete('lock_' . $function_file . '_' . $username);
         XoopsCache::write('lock_' . $function_file . '_' . $username, $userip, $GLOBALS['xrestModuleConfig']['lock_seconds'] + random_int(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']));
-        return ['ErrNum' => 9, 'ErrDesc' => _XC_MI_NOPERMFORPLUGIN];
+        return ['ErrNum' => 9, 'ErrDesc' => _XREST_MI_NOPERMFORPLUGIN];
     }
 }
 
