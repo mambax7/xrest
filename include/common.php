@@ -59,7 +59,7 @@ function checkright($function_file, $username, $password)
     if (0 <> $uid) {
         $rUser  = new XoopsUser($uid);
         $groups = is_object($rUser) ? $rUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
-        $onlineHandler->write($uid, $username, time(), $modid, (string)$_SERVER['REMOTE_ADDR']);
+        $onlineHandler->write($uid, $username, time(), $modid, $_SERVER['REMOTE_ADDR']);
         @ini_set('session.gc_maxlifetime', $xoopsConfig['session_expire'] * 60);
         session_set_saveHandler([&$sessHandler, 'open'], [&$sessHandler, 'close'], [&$sessHandler, 'read'], [&$sessHandler, 'write'], [&$sessHandler, 'destroy'], [&$sessHandler, 'gc']);
         session_start();
@@ -104,7 +104,7 @@ if (!function_exists('xrest_getUserIP')) {
         $ret['sessionid'] = session_id();
         if (!$ip) {
             if ('' != $_SERVER['HTTP_X_FORWARDED_FOR']) {
-                $ip                  = (string)$_SERVER['HTTP_X_FORWARDED_FOR'];
+                $ip                  = $_SERVER['HTTP_X_FORWARDED_FOR'];
                 $ret['is_proxied']   = true;
                 $proxy_ip            = $_SERVER['REMOTE_ADDR'];
                 $ret['network-addy'] = @gethostbyaddr($ip);
@@ -118,7 +118,7 @@ if (!function_exists('xrest_getUserIP')) {
                 }
             } else {
                 $ret['is_proxied']   = false;
-                $ip                  = (string)$_SERVER['REMOTE_ADDR'];
+                $ip                  = $_SERVER['REMOTE_ADDR'];
                 $ret['network-addy'] = @gethostbyaddr($ip);
                 $ret['long']         = @ip2long($ip);
                 if (xrest_isIPv6($ip)) {
