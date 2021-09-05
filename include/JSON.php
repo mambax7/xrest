@@ -780,7 +780,7 @@ if (class_exists('PEAR_Error')) {
             $options = null,
             $userinfo = null
         ) {
-            parent::PEAR_Error($message, $code, $mode, $options, $userinfo);
+            parent::__construct($message, $code, $mode, $options, $userinfo);
         }
     }
 } else {
