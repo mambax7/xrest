@@ -72,7 +72,7 @@ class XrestFieldsHandler extends XoopsPersistableObjectHandler
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         $ret    = [];
         $i      = 1;
-        while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
+        while (false !== ($row = $GLOBALS['xoopsDB']->fetchArray($result))) {
             $ret[$i] = new XrestMysqlFields();
             $ret[$i]->assignVars($row);
             $i++;
