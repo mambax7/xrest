@@ -24,7 +24,7 @@ $GLOBALS['xrestPlugin'] = $plugin;
 
 // Gets URI Values and POST and GET Values
 $path = parse_url(XOOPS_URL . $_SERVER['REQUEST_URI'], PHP_URL_PATH);
-if ('\\' != substr($path, 0, 1)) {
+if (0 !== strpos($path, '\\')) {
     $path .= '\\' . $path;
 }
 if ('\\' != substr($path, strlen($path) - 1, 1)) {
