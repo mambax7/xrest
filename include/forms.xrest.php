@@ -39,7 +39,7 @@
 		$form_fld->setExtra( "enctype='multipart/form-data'" ) ;
 		
 		$field=0;
-		$ele_tray = array();
+		$ele_tray = [];
 		
 		foreach($fields as $field => $fieldinfo){
 			$int = 0;
@@ -163,7 +163,7 @@
 		$tables_handler = xoops_getModuleHandler('tables', 'xrest');
 		$views = $tables_handler->getViewsInDatabase($database); 
 	
-		$ele_tray = array();
+		$ele_tray = [];
 		$form_view = new XoopsThemeForm(sprintf(_XREST_FRM_VIEWSFOR, $database), "views", $_SERVER['PHP_SELF'] ."");
 		$form_view->setExtra( "enctype='multipart/form-data'" ) ;
 				
@@ -210,7 +210,7 @@
 		$plugins_handler = xoops_getModuleHandler('plugins', 'xrest');
 		$FunctionDefine = $plugins_handler->getServerExtensions();
 
-		$ele_tray = array();
+		$ele_tray = [];
 		$form_plugin = new XoopsThemeForm(_XREST_FRM_PLUGINAVAILABLE, "plugins", $_SERVER['PHP_SELF'] ."");
 		$form_plugin->setExtra( "enctype='multipart/form-data'" ) ;
 		
@@ -247,7 +247,7 @@
 		$tables_handler = xoops_getModuleHandler('tables', 'xrest');
 		$tables = $tables_handler->getTablesInDatabase($database, $prefix); 
 	
-		$ele_tray = array();
+		$ele_tray = [];
 		$form_tables = new XoopsThemeForm(sprintf(_XREST_FRM_TABLESFOR, $database, $prefix), "tables", $_SERVER['PHP_SELF'] ."");
 		$form_tables->setExtra( "enctype='multipart/form-data'" ) ;
 				

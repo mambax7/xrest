@@ -68,7 +68,7 @@ class XrestFieldsHandler extends XoopsPersistableObjectHandler
     public function getFieldFromTable($table) {
     	$sql = "SHOW FIELDS FROM `".$GLOBALS['xoopsDB']->prefix($table).'`';
 		$result = $GLOBALS['xoopsDB']->queryF($sql);
-		$ret = array();
+		$ret = [];
 		$i=1;
 		while($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
 			$ret[$i] = new XrestMysqlFields();

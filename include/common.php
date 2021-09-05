@@ -1,6 +1,6 @@
 <?php
 function obj2array($objects) {
-	$ret = array();
+	$ret = [];
 	foreach($objects as $key => $value) {
 		if (is_a($value, 'stdClass')) {
 			$ret[$key] = (array)obj2array($value);
@@ -53,10 +53,10 @@ function checkright($function_file, $username, $password){
 	
 	if ($uid <> 0){
 		$rUser = new XoopsUser($uid);
-		$groups = is_object($rUser) ? $rUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+		$groups = is_object($rUser) ? $rUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 		$online_handler->write($uid, $username, time(), $modid, (string)$_SERVER["REMOTE_ADDR"]);
 		@ini_set( 'session.gc_maxlifetime', $xoopsConfig['session_expire'] * 60 );
-		session_set_save_handler( array( &$sess_handler, 'open' ), array( &$sess_handler, 'close' ), array( &$sess_handler, 'read' ), array( &$sess_handler, 'write' ), array( &$sess_handler, 'destroy' ), array( &$sess_handler, 'gc' ) );
+		session_set_save_handler([&$sess_handler, 'open'], [&$sess_handler, 'close'], [&$sess_handler, 'read'], [&$sess_handler, 'write'], [&$sess_handler, 'destroy'], [&$sess_handler, 'gc']);
 		session_start();
 		$_SESSION['xoopsUserId'] = $uid;
 		$GLOBALS['xoopsUser'] = &$member_handler->getUser( $uid );
@@ -65,7 +65,7 @@ function checkright($function_file, $username, $password){
 		return $gperm_handler->checkRight('plugin_call',$item_id,$groups, $modid);
 	} else {
 		$gperm_handler =& xoops_getHandler('groupperm');
-		$groups = array(XOOPS_GROUP_ANONYMOUS);
+		$groups = [XOOPS_GROUP_ANONYMOUS];
 		return $gperm_handler->checkRight('plugin_call',$item_id,$groups, $modid);
 	}
 }
@@ -86,7 +86,7 @@ if (!function_exists('xrest_isIPv6')) {
 
 if (!function_exists('xrest_getUserIP')) {
 	function xrest_getUserIP($ip=false){ 
-		$ret = array(); 
+		$ret = [];
 		if (is_object($GLOBALS['xoopsUser'])) { 
 			$ret['uid'] = $GLOBALS['xoopsUser']->getVar('uid'); 
 			$ret['uname'] = $GLOBALS['xoopsUser']->getVar('uname'); 
@@ -147,7 +147,7 @@ function check_for_lock($function_file, $username, $password) {
 				$ret['made']<((time()-$GLOBALS['xrestModuleConfig']['lock_seconds'])+mt_rand(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']))) {
 				unset($result[$id]);
 			} elseif ($ret['md5']==$userip['md5']) {
-				$retn = array('ErrNum'=> 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN);
+				$retn = ['ErrNum' => 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN];
 			}
 		}
 		XoopsCache::delete('lock_'.$function_file.'_'.$username);
@@ -162,11 +162,11 @@ function mark_for_lock($function_file, $username, $password) {
 	if ($result = XoopsCache::read('lock_'.$function_file.'_'.$username)) {
 		XoopsCache::delete('lock_'.$function_file.'_'.$username);
 		XoopsCache::write('lock_'.$function_file.'_'.$username, $result, $GLOBALS['xrestModuleConfig']['lock_seconds']+mt_rand(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']));
-		return array('ErrNum'=> 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN);
+		return ['ErrNum' => 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN];
 	} else {
 		XoopsCache::delete('lock_'.$function_file.'_'.$username);
 		XoopsCache::write('lock_'.$function_file.'_'.$username, $userip, $GLOBALS['xrestModuleConfig']['lock_seconds']+mt_rand(1, $GLOBALS['xrestModuleConfig']['lock_random_seed']));
-		return array('ErrNum'=> 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN);
+		return ['ErrNum' => 9, "ErrDesc" => _XC_MI_NOPERMFORPLUGIN];
 	}
 }
 ?>

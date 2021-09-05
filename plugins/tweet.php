@@ -6,7 +6,7 @@
 	function tweet($username, $password, $nick, $message)
 	{
 		if (strlen($message)<10) {
-			return array('CODE' => 300);
+			return ['CODE' => 300];
 		}
 	
 		global $xoopsModuleConfig, $xoopsConfig;
@@ -15,7 +15,7 @@
 			if ($ret = check_for_lock(basename(__FILE__),$username,$password)) { return $ret; }
 			if (!checkright(basename(__FILE__),$username,$password)) {
 				mark_for_lock(basename(__FILE__),$username,$password);
-				return array('ErrNum'=> 9, "ErrDesc" => 'No Permission for plug-in');
+				return ['ErrNum' => 9, "ErrDesc" => 'No Permission for plug-in'];
 			}
 		}
 	
@@ -30,7 +30,7 @@
 		$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 		$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 	
-		$tweet = '#'.str_replace(array('@', '+', '%'), '', $nick).' - '.twitterbomb_TweetString(htmlspecialchars_decode($message), $GLOBALS['twitterbombModuleConfig']['scheduler_aggregate'], $GLOBALS['twitterbombModuleConfig']['scheduler_wordlength']);
+		$tweet = '#'.str_replace(['@', '+', '%'], '', $nick) . ' - ' . twitterbomb_TweetString(htmlspecialchars_decode($message), $GLOBALS['twitterbombModuleConfig']['scheduler_aggregate'], $GLOBALS['twitterbombModuleConfig']['scheduler_wordlength']);
 		$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
 		$scheduler_handler=xoops_getModuleHandler('scheduler', 'twitterbomb');
 		$oauth_handler=xoops_getModuleHandler('oauth', 'twitterbomb');
@@ -39,7 +39,7 @@
 		$oauth = $oauth_handler->getRootOauth(true);
 	
 		$ret = XoopsCache::read('tweetbomb_scheduler_'.md5('2'.'2'));
-		if (!is_array($ret)) $ret=array();
+		if (!is_array($ret)) $ret= [];
 	
 		$schedule = $scheduler_handler->create();
 		$schedule->setVar('cid', '2');
@@ -50,7 +50,7 @@
 		$schedule->setVar('uid', user_uid($username, $password));
 		$schedule = $scheduler_handler->get($scheduler_handler->insert($schedule));
 		$url = $urls_handler->getUrl($schedule->getVar('cid'), $schedule->getVar('catid'));
-		$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$schedule->getVar('sid').'&cid='.$schedule->getVar('cid').'&catid='.$schedule->getVar('catid').'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$tweet))));
+		$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$schedule->getVar('sid').'&cid='.$schedule->getVar('cid').'&catid='.$schedule->getVar('catid').'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet))));
 		$log = $log_handler->create();
 		$log->setVar('provider', 'scheduler');
 		$log->setVar('cid', $schedule->getVar('cid'));
@@ -60,7 +60,7 @@
 		$log->setVar('tweet', substr($tweet,0,139));
 		$log->setVar('tags', twitterbomb_ExtractTags($tweet));
 		$log = $log_handler->get($lid = $log_handler->insert($log, true));
-		$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$schedule->getVar('sid').'&cid='.$schedule->getVar('cid').'&lid='.$lid.'&catid='.$schedule->getVar('catid').'&uri='.urlencode( sprintf($url, urlencode(str_replace(array('#', '@'), '',$tweet))));
+		$link = XOOPS_URL.'/modules/twitterbomb/go.php?sid='.$schedule->getVar('sid').'&cid='.$schedule->getVar('cid').'&lid='.$lid.'&catid='.$schedule->getVar('catid').'&uri='.urlencode( sprintf($url, urlencode(str_replace(['#', '@'], '', $tweet))));
 		$link = twitterbomb_shortenurl($link);
 		$log->setVar('url', $link);
 		$log = $log_handler->get($lid = $log_handler->insert($log, true));
@@ -87,12 +87,12 @@
 				}
 			}
 			XoopsCache::write('tweetbomb_scheduler_'.md5('2'.'2'), $ret, $GLOBALS['twitterbombModuleConfig']['interval_of_cron']+$GLOBALS['twitterbombModuleConfig']['scheduler_cache']);
-			return array('CODE' => 200);
+			return ['CODE' => 200];
 		} else {
 			$schedule->setVar('when', time());
 			$scheduler_handler->insert($schedule);
 			@$log_handler->delete($log, true);
-			return array('CODE' => 100);
+			return ['CODE' => 100];
 		}
 	
 	}
@@ -101,19 +101,22 @@
 	 *   XSD Variable Definitions (REST JSON/XML/SERIALISATION ONLY)
 	 */
 	function tweet_xsd_rest($parser){
-		$xsd = array();
+		$xsd = [];
 		$i=0;
-		$xsd['request'][$i++] = array("name" => "username", "type" => "string");
-		$xsd['request'][$i++] = array("name" => "password", "type" => "string");
-		$xsd['request'][$i++] = array("name" => "nick", "items" => array(
-												array("name" => "password", "type" => "string"),
-												array("name" => "password", "type" => "string")));
-		$xsd['request'][$i++] = array("name" => "message", "type" => "string");
+		$xsd['request'][$i++] = ["name" => "username", "type" => "string"];
+		$xsd['request'][$i++] = ["name" => "password", "type" => "string"];
+		$xsd['request'][$i++] = [
+            "name" => "nick", "items" => [
+                ["name" => "password", "type" => "string"],
+                ["name" => "password", "type" => "string"]
+            ]
+        ];
+		$xsd['request'][$i++] = ["name" => "message", "type" => "string"];
 	
 		$i=0;
-		$xsd['response'][$i++] = array("name" => "ERRNUM", "type" => "integer");
-		$xsd['response'][$i++] = array("name" => "RESULT", "type" => "string");
-		$xsd['response'][$i++] = array("name" => "CODE", "type" => "string");
+		$xsd['response'][$i++] = ["name" => "ERRNUM", "type" => "integer"];
+		$xsd['response'][$i++] = ["name" => "RESULT", "type" => "string"];
+		$xsd['response'][$i++] = ["name" => "CODE", "type" => "string"];
 	
 		return $xsd;
 	}
@@ -122,17 +125,17 @@
 	 *   XSD Variable Definitions - See Templating *.XML (SOAP ONLY)
 	 */
 	function tweet_xsd_soap($parser){
-		$xsd = array();
+		$xsd = [];
 		$i=0;
-		$xsd['request'][$i++] = array("name" => "username", "type" => "string");
-		$xsd['request'][$i++] = array("name" => "password", "type" => "string");	
-		$xsd['request'][$i++] = array("name" => "nick", "type" => "string");
-		$xsd['request'][$i++] = array("name" => "message", "type" => "string");
+		$xsd['request'][$i++] = ["name" => "username", "type" => "string"];
+		$xsd['request'][$i++] = ["name" => "password", "type" => "string"];
+		$xsd['request'][$i++] = ["name" => "nick", "type" => "string"];
+		$xsd['request'][$i++] = ["name" => "message", "type" => "string"];
 				
 		$i=0;
-		$xsd['response'][$i++] = array("name" => "ERRNUM", "type" => "integer");
-		$xsd['response'][$i++] = array("name" => "RESULT", "type" => "string");
-		$xsd['response'][$i++] = array("name" => "CODE", "type" => "string");
+		$xsd['response'][$i++] = ["name" => "ERRNUM", "type" => "integer"];
+		$xsd['response'][$i++] = ["name" => "RESULT", "type" => "string"];
+		$xsd['response'][$i++] = ["name" => "CODE", "type" => "string"];
 				
 		return $xsd;
 	}

@@ -44,8 +44,8 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
 	}
 	
 	private function getDirListAsArray( $dirname ) {
-		$ignored = array();
-		$list = array();
+		$ignored = [];
+		$list = [];
 		if ( substr( $dirname, -1 ) != '/' ) {
 			$dirname .= '/';
 		}
@@ -67,7 +67,7 @@ class XrestPluginsHandler extends XoopsPersistableObjectHandler
 
 	private function getFileListAsArray($dirname, $prefix="", $extension = '.php' )
 	{
-		$filelist = array();
+		$filelist = [];
 		if (substr($dirname, -1) == '/') {
 			$dirname = substr($dirname, 0, -1);
 		}

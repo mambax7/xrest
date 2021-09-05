@@ -5,7 +5,7 @@ $GLOBALS['xoopsLogger']->activated = false;
 $xoopsPreload =& XoopsPreload::getInstance();
 $xoopsPreload->triggerEvent('api.server.bootstrap');
 
-$result = array();
+$result = [];
 xoops_load('xoopscache');
 require_once('common.php');
 
@@ -28,7 +28,7 @@ if (substr($path,0,1)!='\\')
 if (substr($path,strlen($path)-1,1)!='\\')
 	$path .= $path . '\\';
 $request = parse_url(XOOPS_URL.$_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-$values = array();
+$values = [];
 parse_str($request, $values);
 if (isset($_POST)) {
 	foreach($_POST as $field => $value) {
@@ -42,7 +42,7 @@ if (isset($_GET)) {
 }
 
 $xoopsPreload =& XoopsPreload::getInstance();
-$xoopsPreload->triggerEvent('api.server.start', array($mode, $plugin, $path, $request, $values));
+$xoopsPreload->triggerEvent('api.server.start', [$mode, $plugin, $path, $request, $values]);
 
 switch($mode) {
 	case 'soap':
@@ -62,17 +62,17 @@ switch($mode) {
 			if ($GLOBALS['xrestModuleConfig']['wsdl']==1 && $wsdlfunc()==true){
 				if (function_exists($wsdlservicefunc)) {
 					if ($wsdlservicefunc()==false) {
-						$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . 'http.wsdl', array('uri' => XOOPS_URL.$path));
+						$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . 'http.wsdl', ['uri' => XOOPS_URL . $path]);
 					} else {
-						$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . $plugin . '.service', array('uri' => XOOPS_URL.$path));
+						$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . $plugin . '.service', ['uri' => XOOPS_URL . $path]);
 					}
 				} else {
-					$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . $plugin . '.service', array('uri' => XOOPS_URL.$path));
+					$server = new SoapServer(XOOPS_URL.str_replace('soap', 'wsdl', $path) . $plugin . '.service', ['uri' => XOOPS_URL . $path]);
 				}
 			} else {
-				$server = new SoapServer(NULL, array('uri' => XOOPS_URL.$path));
+				$server = new SoapServer(NULL, ['uri' => XOOPS_URL . $path]);
 		} else {
-			$server = new SoapServer(NULL, array('uri' => XOOPS_URL.$path));
+			$server = new SoapServer(NULL, ['uri' => XOOPS_URL . $path]);
 		}
 		
 		// Adds SOAP Function
@@ -144,7 +144,7 @@ switch($mode) {
 				
 				// Checks for Cached Result
 				if ((!$result = XoopsCache::read('xrest_results_'.$plugin.'_'.md5(implode(':',$values))))&&$pluginObj->getVar('active')==true) {
-					$result = array();
+					$result = [];
 					$opfunc = $plugin;
 					if (function_exists($plugin . '_xsd_rest'))
 						$xsdfunc = $plugin . '_xsd_rest';
@@ -153,7 +153,7 @@ switch($mode) {
 					elseif (function_exists($plugin . '_xsd_soap'))
 						$xsdfunc = $plugin . '_xsd_soap';				
 					$opxsd = $xsdfunc();
-					$tmp=array();
+					$tmp= [];
 					if (!empty($opfunc)) {
 						$fields=0;
 						

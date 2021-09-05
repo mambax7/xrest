@@ -3,7 +3,7 @@ $module_handler =& xoops_getHandler('module');
 $GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
 
 global $adminmenu;
-$adminmenu=array();
+$adminmenu= [];
 $adminmenu[0]['title'] = _XREST_MI_ADMINMENU_0;
 $adminmenu[0]['link'] = "admin/index.php?op=dashboard";
 $adminmenu[0]['icon'] = '../../'.$GLOBALS['xrestModule']->getInfo('icons32').'/home.png';
