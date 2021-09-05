@@ -69,7 +69,7 @@ class XrestMysqlTables extends XoopsObject
 */
 class XrestTablesHandler extends XoopsPersistableObjectHandler
 {
-    function __construct(&$db) 
+    function __construct($db)
     {
 		$this->db = $db;
         parent::__construct($db, 'rest_tables', 'XrestTables', "tbl_id", "tablename");

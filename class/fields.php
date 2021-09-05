@@ -63,7 +63,7 @@ class XrestMysqlFields extends XoopsObject
 */
 class XrestFieldsHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(&$db) 
+    public function __construct($db)
     {
 		$this->db = $db;
         parent::__construct($db, 'rest_fields', 'XrestFields', "fld_id", "fieldname");

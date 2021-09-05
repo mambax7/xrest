@@ -35,7 +35,7 @@ class XrestPlugins extends XoopsObject
 */
 class XrestPluginsHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct(&$db) 
+    public function __construct($db)
     {
 		$this->db = $db;
         parent::__construct($db, 'rest_plugins', 'XrestPlugins', "plugin_id", "plugin_name");
