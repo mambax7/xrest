@@ -30,8 +30,8 @@
 		
 	$GLOBALS['myts'] = MyTextSanitizer::getInstance();
 	
-	$module_handler = xoops_gethandler('module');
-	$config_handler = xoops_gethandler('config');
+	$module_handler = xoops_getHandler('module');
+	$config_handler = xoops_getHandler('config');
 	$GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
 	$GLOBALS['xrestModuleConfig'] = $config_handler->getConfigList($GLOBALS['xrestModule']->getVar('mid')); 
 		
@@ -53,7 +53,7 @@
 	$GLOBALS['xrestImageAdmin'] = XOOPS_URL .'/'. $GLOBALS['xrestModule']->getInfo('icons32');
 	
 	if ($GLOBALS['xoopsUser']) {
-	    $moduleperm_handler =& xoops_gethandler('groupperm');
+	    $moduleperm_handler =& xoops_getHandler('groupperm');
 	    if (!$moduleperm_handler->checkRight('module_admin', $GLOBALS['xrestModule']->getVar( 'mid' ), $GLOBALS['xoopsUser']->getGroups())) {
 	        redirect_header(XOOPS_URL, 1, _NOPERM);
 	        exit();

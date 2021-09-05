@@ -25,16 +25,16 @@
 	
 		$GLOBALS['myts'] = MyTextSanitizer::getInstance();
 	
-		$module_handler = xoops_gethandler('module');
-		$config_handler = xoops_gethandler('config');
+		$module_handler = xoops_getHandler('module');
+		$config_handler = xoops_getHandler('config');
 		$GLOBALS['twitterbombModule'] = $module_handler->getByDirname('twitterbomb');
 		$GLOBALS['twitterbombModuleConfig'] = $config_handler->getConfigList($GLOBALS['twitterbombModule']->getVar('mid'));
 	
 		$tweet = '#'.str_replace(array('@', '+', '%'), '', $nick).' - '.twitterbomb_TweetString(htmlspecialchars_decode($message), $GLOBALS['twitterbombModuleConfig']['scheduler_aggregate'], $GLOBALS['twitterbombModuleConfig']['scheduler_wordlength']);
-		$log_handler=xoops_getmodulehandler('log', 'twitterbomb');
-		$scheduler_handler=xoops_getmodulehandler('scheduler', 'twitterbomb');
-		$oauth_handler=xoops_getmodulehandler('oauth', 'twitterbomb');
-		$urls_handler=xoops_getmodulehandler('urls', 'twitterbomb');
+		$log_handler=xoops_getModuleHandler('log', 'twitterbomb');
+		$scheduler_handler=xoops_getModuleHandler('scheduler', 'twitterbomb');
+		$oauth_handler=xoops_getModuleHandler('oauth', 'twitterbomb');
+		$urls_handler=xoops_getModuleHandler('urls', 'twitterbomb');
 	
 		$oauth = $oauth_handler->getRootOauth(true);
 	
@@ -66,7 +66,7 @@
 		$log = $log_handler->get($lid = $log_handler->insert($log, true));
 		if ($id = $oauth->sendTweet($schedule->getVar('pre').' '.$tweet, $link, true)) {
 			if ($GLOBALS['twitterbombModuleConfig']['tags']) {
-				$tag_handler = xoops_getmodulehandler('tag', 'tag');
+				$tag_handler = xoops_getModuleHandler('tag', 'tag');
 				$tag_handler->updateByItem(twitterbomb_ExtractTags($tweet), $lid, $GLOBALS['twitterbombModule']->getVar("dirname"), $schedule->getVar('catid'));
 			}
 			$log->setVar('id', $id);

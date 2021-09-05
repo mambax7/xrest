@@ -38,15 +38,15 @@ function user_uid($username, $password){
 
 function checkright($function_file, $username, $password){
 	$uid = user_uid($username,$password);
-	$module_handler = xoops_gethandler('module');
-	$gperm_handler =& xoops_gethandler('groupperm');
-	$member_handler =& xoops_gethandler('member');
-	$online_handler =& xoops_gethandler('online');		
+	$module_handler = xoops_getHandler('module');
+	$gperm_handler =& xoops_getHandler('groupperm');
+	$member_handler =& xoops_getHandler('member');
+	$online_handler =& xoops_getHandler('online');
 
 	$GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
 	$GLOBALS['xrestPlugin']['user'] = $username;
 
-	$plugin_handler = xoops_getmodulehandler('plugins', 'xrest');
+	$plugin_handler = xoops_getModuleHandler('plugins', 'xrest');
 	$plugin = $plugin_handler->getPluginWithFile($function_file);
 	$item_id = $plugin->getVar('plugin_id');
 	$modid = $GLOBALS['xrestModule']->getVar('mid');
@@ -64,7 +64,7 @@ function checkright($function_file, $username, $password){
 		$GLOBALS['sess_handler']->update_cookie();
 		return $gperm_handler->checkRight('plugin_call',$item_id,$groups, $modid);
 	} else {
-		$gperm_handler =& xoops_gethandler('groupperm');
+		$gperm_handler =& xoops_getHandler('groupperm');
 		$groups = array(XOOPS_GROUP_ANONYMOUS);
 		return $gperm_handler->checkRight('plugin_call',$item_id,$groups, $modid);
 	}
@@ -102,7 +102,7 @@ if (!function_exists('xrest_getUserIP')) {
 				$proxy_ip = $_SERVER["REMOTE_ADDR"];  
 				$ret['network-addy'] = @gethostbyaddr($ip);  
 				$ret['long'] = @ip2long($ip); 
-				if (xrest_isipv6($ip)) { 
+				if (xrest_isIPv6($ip)) {
 					$ret['ip6'] = $ip; 
 					$ret['proxy-ip6'] = $proxy_ip; 
 				} else { 
@@ -114,7 +114,7 @@ if (!function_exists('xrest_getUserIP')) {
 				$ip = (string)$_SERVER["REMOTE_ADDR"];  
 				$ret['network-addy'] = @gethostbyaddr($ip);  
 				$ret['long'] = @ip2long($ip); 
-				if (xrest_isipv6($ip)) { 
+				if (xrest_isIPv6($ip)) {
 					$ret['ip6'] = $ip; 
 				} else { 
 					$ret['ip4'] = $ip; 
@@ -124,7 +124,7 @@ if (!function_exists('xrest_getUserIP')) {
 			$ret['is_proxied'] = false; 
 			$ret['network-addy'] = @gethostbyaddr($ip);  
 			$ret['long'] = @ip2long($ip); 
-			if (xrest_isipv6($ip)) { 
+			if (xrest_isIPv6($ip)) {
 				$ret['ip6'] = $ip; 
 			} else { 
 				$ret['ip4'] = $ip; 

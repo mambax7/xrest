@@ -15,8 +15,8 @@ class XrestCorePreload extends XoopsPreloadItem
 {
     public function eventCoreIncludeCommonEnd($args)
     {
-        $module_handler         = xoops_gethandler('module');
-        $config_handler         = xoops_gethandler('config');
+        $module_handler         = xoops_getHandler('module');
+        $config_handler         = xoops_getHandler('config');
         $GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
         if (is_object($GLOBALS['xrestModule'])) {
             $GLOBALS['xrestModuleConfig'] = $config_handler->getConfigList($GLOBALS['xrestModule']->getVar('mid'));

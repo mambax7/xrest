@@ -3,7 +3,7 @@
 	
 	function xrest_admin_form_select_table($tbl_id) {
 		xoops_loadLanguage('forms', 'xrest');
-		$tables_handler = xoops_getmodulehandler('tables', 'xrest');
+		$tables_handler = xoops_getModuleHandler('tables', 'xrest');
 		$criteria = new Criteria('`view`', '0');
 		
 		$form_sel = new XoopsThemeForm(_XREST_FRM_SELECTTABLE, "seltable", $_SERVER['PHP_SELF'] ."");
@@ -23,8 +23,8 @@
 	
 	function xrest_admin_form_select_fields($tbl_id) {
 		xoops_loadLanguage('forms', 'xrest');
-		$tables_handler = xoops_getmodulehandler('tables', 'xrest');
-		$fields_handler = xoops_getmodulehandler('fields', 'xrest');
+		$tables_handler = xoops_getModuleHandler('tables', 'xrest');
+		$fields_handler = xoops_getModuleHandler('fields', 'xrest');
 		
 		$table = $tables_handler->get($tbl_id);
 		
@@ -160,7 +160,7 @@
 	
 	function xrest_admin_form_select_views($database) {
 		xoops_loadLanguage('forms', 'xrest');
-		$tables_handler = xoops_getmodulehandler('tables', 'xrest');
+		$tables_handler = xoops_getModuleHandler('tables', 'xrest');
 		$views = $tables_handler->getViewsInDatabase($database); 
 	
 		$ele_tray = array();
@@ -207,7 +207,7 @@
 	
 	function xrest_admin_form_select_plugins() {
 		xoops_loadLanguage('forms', 'xrest');
-		$plugins_handler = xoops_getmodulehandler('plugins', 'xrest');
+		$plugins_handler = xoops_getModuleHandler('plugins', 'xrest');
 		$FunctionDefine = $plugins_handler->getServerExtensions();
 
 		$ele_tray = array();
@@ -244,7 +244,7 @@
 	
 	function xrest_admin_form_select_tables($database, $prefix) {
 		xoops_loadLanguage('forms', 'xrest');
-		$tables_handler = xoops_getmodulehandler('tables', 'xrest');
+		$tables_handler = xoops_getModuleHandler('tables', 'xrest');
 		$tables = $tables_handler->getTablesInDatabase($database, $prefix); 
 	
 		$ele_tray = array();

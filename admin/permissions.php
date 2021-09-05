@@ -14,10 +14,10 @@ echo $indexAdmin->addNavigation('permissions.php');
 switch ($op) {
     case "default":
     default:
-		$module_handler = xoops_gethandler('module');
+		$module_handler = xoops_getHandler('module');
 		$GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
         // View Categories permissions
-        $plugins_handler = xoops_getmodulehandler('plugins', 'xrest');
+        $plugins_handler = xoops_getModuleHandler('plugins', 'xrest');
         $plugins = $plugins_handler->getObjects(NULL, true);
         if (count($plugins)) {
         	$form_view = new XoopsGroupPermForm(_XREST_FRM_VIEW_FUNCTION, $GLOBALS['xrestModule']->getVar('mid'), "plugin_call", "<img id='toptableicon' src=" . XOOPS_URL . "/modules/" . $GLOBALS['xrestModule']->dirname() . "/images/close12.gif alt='' /></a>" . _XREST_FRM_PERMISSIONSVIEWMAN . "</h3><div id='toptable'><span style=\"color: #567; margin: 3px 0 0 0; font-size: small; display: block; \">" . _XREST_FRM_VIEW_FUNCTION . "</span>", 'admin/permissions.php');

@@ -10,8 +10,8 @@ xoops_load('xoopscache');
 require_once('common.php');
 
 // Set Globals
-$module_handler = xoops_gethandler('module');
-$config_handler = xoops_gethandler('config');
+$module_handler = xoops_getHandler('module');
+$config_handler = xoops_getHandler('config');
 $GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
 $GLOBALS['xrestModuleConfig'] = $config_handler->getConfigList($GLOBALS['xrestModule']->getVar('mid')); 
 
@@ -47,7 +47,7 @@ $xoopsPreload->triggerEvent('api.server.start', array($mode, $plugin, $path, $re
 switch($mode) {
 	case 'soap':
 		// Loads Specific Plugin
-		$plugins_handler = xoops_getmodulehandler('plugins', 'xrest');
+		$plugins_handler = xoops_getModuleHandler('plugins', 'xrest');
 		$pluginObj = $plugins_handler->getPluginWithName($plugin);
 		if (is_object($pluginObj)) {
 			require_once($GLOBALS['xoops']->path('modules/xrest/plugins/'.$pluginObj->getVar('plugin_file')));
@@ -94,7 +94,7 @@ switch($mode) {
 		$GLOBALS['xoopsTpl']->assign('values', $values);
 		
 		// Loads Specific Plugin
-		$plugins_handler = xoops_getmodulehandler('plugins', 'xrest');
+		$plugins_handler = xoops_getModuleHandler('plugins', 'xrest');
 		$pluginObj = $plugins_handler->getPluginWithName($plugin);
 		if (is_object($pluginObj)) {
 			require_once($GLOBALS['xoops']->path('modules/xrest/plugins/'.$pluginObj->getVar('plugin_file')));
@@ -137,7 +137,7 @@ switch($mode) {
 		if (isset($plugin)) {
 
 			// Load Plugin Object
-			$plugins_handler = xoops_getmodulehandler('plugins', 'xrest');
+			$plugins_handler = xoops_getModuleHandler('plugins', 'xrest');
 			$pluginObj = $plugins_handler->getPluginWithName($plugin);
 			if (is_object($pluginObj)) {
 				require_once($GLOBALS['xoops']->path('modules/xrest/plugins/'.$pluginObj->getVar('plugin_file')));

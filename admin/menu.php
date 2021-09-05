@@ -1,5 +1,5 @@
 <?php
-$module_handler =& xoops_gethandler('module');
+$module_handler =& xoops_getHandler('module');
 $GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
 
 global $adminmenu;
