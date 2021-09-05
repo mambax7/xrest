@@ -185,15 +185,15 @@ $modversion['config'][$i]['options']     = [
     _XREST_MI_SECONDS_30   => 30,
 ];
 
-srand((((float)('0' . substr(microtime(), strpos(microtime(), ' ') + 1, strlen(microtime()) - strpos(microtime(), ' ') + 1))) * mt_rand(30, 99999)));
-srand((((float)('0' . substr(microtime(), strpos(microtime(), ' ') + 1, strlen(microtime()) - strpos(microtime(), ' ') + 1))) * mt_rand(30, 99999)));
+mt_srand((((float)('0' . substr(microtime(), strpos(microtime(), ' ') + 1, strlen(microtime()) - strpos(microtime(), ' ') + 1))) * random_int(30, 99999)));
+mt_srand((((float)('0' . substr(microtime(), strpos(microtime(), ' ') + 1, strlen(microtime()) - strpos(microtime(), ' ') + 1))) * random_int(30, 99999)));
 $i++;
 $modversion['config'][$i]['name']        = 'lock_random_seed';
 $modversion['config'][$i]['title']       = '_XREST_MI_USERANDOMLOCK';
 $modversion['config'][$i]['description'] = '_XREST_MI_USERANDOMLOCK_DESC';
 $modversion['config'][$i]['formtype']    = 'text';
 $modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = mt_rand(30, 170);
+$modversion['config'][$i]['default']     = random_int(30, 170);
 
 $i++;
 $modversion['config'][$i]['name']        = 'cache_seconds';
