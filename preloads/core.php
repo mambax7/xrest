@@ -44,7 +44,7 @@ class XrestCorePreload extends XoopsPreloadItem
         }
         if (is_dir($dirname) && $handle = opendir($dirname)) {
             while (false !== ($file = readdir($handle))) {
-                if (!preg_match("/^[\.]{1,2}$/", $file) && is_file($dirname . '/' . $file)) {
+                if (!preg_match('/^[\.]{1,2}$/', $file) && is_file($dirname . '/' . $file)) {
                     if (!empty($prefix) && strpos(' ' . $file, $prefix) > 0) {
                         $filelist[$file] = $file;
                     } elseif (empty($prefix)) {
