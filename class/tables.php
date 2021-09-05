@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class XrestTables extends XoopsObject
 {
-    public function XrestTables($id = null)
+    public function __construct($id = null)
     {
         $this->initVar('tbl_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('tablename', XOBJ_DTYPE_TXTBOX, null, false, 220);
@@ -31,7 +31,7 @@ class XrestTables extends XoopsObject
  */
 class XrestMysqlTables extends XoopsObject
 {
-    public function XrestMysqlTables()
+    public function __construct()
     {
         $this->initVar('Name', XOBJ_DTYPE_OTHER, null, false);
         $this->initVar('Engine', XOBJ_DTYPE_OTHER, null, false);

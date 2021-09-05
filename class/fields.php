@@ -11,7 +11,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class XrestFields extends XoopsObject
 {
-    public function XrestFields($id = null)
+    public function __construct($id = null)
     {
         $this->initVar('fld_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('tbl_id', XOBJ_DTYPE_INT, null, false);
@@ -38,7 +38,7 @@ class XrestFields extends XoopsObject
  */
 class XrestMysqlFields extends XoopsObject
 {
-    public function XrestMysqlFields()
+    public function __construct()
     {
         $this->initVar('Field', XOBJ_DTYPE_OTHER, null, false);
         $this->initVar('Type', XOBJ_DTYPE_OTHER, null, false);

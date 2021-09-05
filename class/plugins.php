@@ -13,7 +13,7 @@ xoops_load('xoopscache');
  */
 class XrestPlugins extends XoopsObject
 {
-    public function XrestPlugins($id = null)
+    public function __construct($id = null)
     {
         $this->initVar('plugin_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('plugin_name', XOBJ_DTYPE_TXTBOX, null, false, 255);
