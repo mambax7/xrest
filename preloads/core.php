@@ -1,27 +1,27 @@
 <?php
 /**
- * @package     xortify
- * @subpackage  module
- * @description	Sector Nexoork Security Drone
- * @author	    Simon Roberts WISHCRAFT <simon@chronolabs.coop>
- * @author	    Richardo Costa TRABIS 
- * @copyright	copyright (c) 2010-2013 XOOPS.org
- * @licence		GPL 2.0 - see docs/LICENCE.txt
+ * @package        xortify
+ * @subpackage     module
+ * @description    Sector Nexoork Security Drone
+ * @author         Simon Roberts WISHCRAFT <simon@chronolabs.coop>
+ * @author         Richardo Costa TRABIS
+ * @copyright      copyright (c) 2010-2013 XOOPS.org
+ * @licence        GPL 2.0 - see docs/LICENCE.txt
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 class XrestCorePreload extends XoopsPreloadItem
 {
     public function eventCoreIncludeCommonEnd($args)
     {
-        $module_handler         = xoops_getHandler('module');
-        $config_handler         = xoops_getHandler('config');
-        $GLOBALS['xrestModule'] = $module_handler->getByDirname('xrest');
+        $moduleHandler          = xoops_getHandler('module');
+        $configHandler          = xoops_getHandler('config');
+        $GLOBALS['xrestModule'] = $moduleHandler->getByDirname('xrest');
         if (is_object($GLOBALS['xrestModule'])) {
-            $GLOBALS['xrestModuleConfig'] = $config_handler->getConfigList($GLOBALS['xrestModule']->getVar('mid'));
+            $GLOBALS['xrestModuleConfig'] = $configHandler->getConfigList($GLOBALS['xrestModule']->getVar('mid'));
         }
-        include_once XOOPS_ROOT_PATH . '/class/cache/xoopscache.php';
+        require_once XOOPS_ROOT_PATH . '/class/cache/xoopscache.php';
         $result = XoopsCache::read('xrest_cleanup_last');
         if ((isset($result['when']) ? (float)$result['when'] : -microtime(true)) + $GLOBALS['xrestModuleConfig']['run_cleanup'] <= microtime(true)) {
             $result          = [];

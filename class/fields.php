@@ -1,13 +1,14 @@
 <?php
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	exit();
+    exit();
 }
+
 /**
  * Class for Blue Room XRest 1.52
- * @author Simon Roberts <simon@chronolabs.coop>
+ * @author    Simon Roberts <simon@chronolabs.coop>
  * @copyright copyright (c) 2012-2011 chronolabs.coop
- * @package kernel
+ * @package   kernel
  */
 class XrestFields extends XoopsObject
 {
@@ -32,9 +33,9 @@ class XrestFields extends XoopsObject
 
 /**
  * Class for Blue Room XRest 1.52
- * @author Simon Roberts <simon@chronolabs.coop>
+ * @author    Simon Roberts <simon@chronolabs.coop>
  * @copyright copyright (c) 2012-2011 chronolabs.coop
- * @package kernel
+ * @package   kernel
  */
 class XrestMysqlFields extends XoopsObject
 {
@@ -50,46 +51,49 @@ class XrestMysqlFields extends XoopsObject
 }
 
 /**
-* XOOPS policies handler class.
-* This class is responsible for providing data access mechanisms to the data source
-* of XOOPS user class objects.
-*
-* @author  Simon Roberts <simon@chronolabs.coop>
-* @package kernel
-*/
+ * XOOPS policies handler class.
+ * This class is responsible for providing data access mechanisms to the data source
+ * of XOOPS user class objects.
+ *
+ * @author  Simon Roberts <simon@chronolabs.coop>
+ * @package kernel
+ */
 class XrestFieldsHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct($db)
+    public function __construct(\XoopsDatabase $db)
     {
-		$this->db = $db;
+        $this->db = $db;
         parent::__construct($db, 'rest_fields', 'XrestFields', 'fld_id', 'fieldname');
     }
-    
-    public function getFieldFromTable($table) {
-    	$sql = 'SHOW FIELDS FROM `' . $GLOBALS['xoopsDB']->prefix($table) . '`';
-		$result = $GLOBALS['xoopsDB']->queryF($sql);
-		$ret = [];
-		$i=1;
-		while($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
-			$ret[$i] = new XrestMysqlFields();
-			$ret[$i]->assignVars($row);
-			$i++;	
-		}
-		return $ret;
+
+    public function getFieldFromTable($table)
+    {
+        $sql    = 'SHOW FIELDS FROM `' . $GLOBALS['xoopsDB']->prefix($table) . '`';
+        $result = $GLOBALS['xoopsDB']->queryF($sql);
+        $ret    = [];
+        $i      = 1;
+        while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
+            $ret[$i] = new XrestMysqlFields();
+            $ret[$i]->assignVars($row);
+            $i++;
+        }
+        return $ret;
     }
-    
-    public function getFieldWithNameAndTableID($fieldname, $tbl_id) {
-    	$criteria = new CriteriaCompo(new Criteria('`fieldname`', $fieldname));
-    	$criteria->add(new Criteria('`tbl_id`', $tbl_id));
-    	if (0 == $this->getCount($criteria)) {
-    		return false;
-    	} elseif ($objects = $this->getObjects($criteria, false)) {
-    		if (isset($objects[0]))
-    			return $objects[0];
-    		else 
-    			return false;
-    	}
-    	return false;
+
+    public function getFieldWithNameAndTableID($fieldname, $tbl_id)
+    {
+        $criteria = new CriteriaCompo(new Criteria('`fieldname`', $fieldname));
+        $criteria->add(new Criteria('`tbl_id`', $tbl_id));
+        if (0 == $this->getCount($criteria)) {
+            return false;
+        } elseif ($objects = $this->getObjects($criteria, false)) {
+            if (isset($objects[0])) {
+                return $objects[0];
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 }
 

@@ -1,13 +1,14 @@
 <?php
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	exit();
+    exit();
 }
+
 /**
  * Class for Blue Room Xrest 1.52
- * @author Simon Roberts <simon@chronolabs.coop>
+ * @author    Simon Roberts <simon@chronolabs.coop>
  * @copyright copyright (c) 2012-2011 chronolabs.coop
- * @package kernel
+ * @package   kernel
  */
 class XrestTables extends XoopsObject
 {
@@ -25,9 +26,9 @@ class XrestTables extends XoopsObject
 
 /**
  * Class for Blue Room XRest 1.52
- * @author Simon Roberts <simon@chronolabs.coop>
+ * @author    Simon Roberts <simon@chronolabs.coop>
  * @copyright copyright (c) 2012-2011 chronolabs.coop
- * @package kernel
+ * @package   kernel
  */
 class XrestMysqlTables extends XoopsObject
 {
@@ -54,18 +55,17 @@ class XrestMysqlTables extends XoopsObject
     }
 }
 
-
 /**
-* XOOPS policies handler class.
-* This class is responsible for providing data access mechanisms to the data source
-* of XOOPS user class objects.
-*
-* @author  Simon Roberts <simon@chronolabs.coop>
-* @package kernel
-*/
+ * XOOPS policies handler class.
+ * This class is responsible for providing data access mechanisms to the data source
+ * of XOOPS user class objects.
+ *
+ * @author  Simon Roberts <simon@chronolabs.coop>
+ * @package kernel
+ */
 class XrestTablesHandler extends XoopsPersistableObjectHandler
 {
-    public function __construct($db)
+    public function __construct(\XoopsDatabase $db)
     {
         $this->db = $db;
         parent::__construct($db, 'rest_tables', 'XrestTables', 'tbl_id', 'tablename');
@@ -81,7 +81,7 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         $ret    = [];
         $i      = 1;
-        while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
+        while (false !== ($row = $GLOBALS['xoopsDB']->fetchArray($result))) {
             if ('VIEW' != $row['Comment'] && 'TRIGGER' != $row['Comment'] && 'STORE PROCEEDURE' != $row['Comment']) {
                 $ret[$i] = new XrestMysqlTables();
                 $ret[$i]->assignVars($row);
@@ -97,7 +97,7 @@ class XrestTablesHandler extends XoopsPersistableObjectHandler
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         $ret    = [];
         $i      = 1;
-        while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
+        while (false !== ($row = $GLOBALS['xoopsDB']->fetchArray($result))) {
             if ('VIEW' == $row['Comment']) {
                 $ret[$i] = new XrestMysqlTables();
                 $ret[$i]->assignVars($row);
