@@ -22,6 +22,16 @@
  * @translation     Richardo Costa <lusopoemas@gmail.com>
  * @translation     Kris_fr <kris@frxoops.org>
  */
+
+use Xmf\Module\Admin;
+use XoopsModules\Xrest\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
+require dirname(__DIR__) . '/preloads/autoloader.php';
+
 require dirname(__DIR__, 3) . '/include/cp_header.php';
 
 if (!defined('_CHARSET')) {
@@ -32,6 +42,18 @@ if (!defined('_CHARSET_ISO')) {
 }
 
 $GLOBALS['myts'] = MyTextSanitizer::getInstance();
+
+$moduleDirName = \basename(\dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+$adminObject = Admin::getInstance();
+
+$helper = Helper::getInstance();
+// Load language files
+$helper->loadLanguage('admin');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('common');
+$helper->loadLanguage('forms');
 
 $moduleHandler                = xoops_getHandler('module');
 $configHandler                = xoops_getHandler('config');
@@ -45,13 +67,7 @@ xoops_load('xoopsformloader');
 require_once $GLOBALS['xoops']->path('class' . DS . 'xoopsmailer.php');
 require_once $GLOBALS['xoops']->path('class' . DS . 'xoopstree.php');
 
-if (file_exists($GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php'))) {
-    require_once $GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php');
-    //return true;
-} else {
-    echo xoops_error("Error: You don't use the Frameworks \"admin module\". Please install this Frameworks");
-    //return false;
-}
+
 $GLOBALS['xrestImageIcon']  = XOOPS_URL . '/' . $GLOBALS['xrestModule']->getInfo('icons16');
 $GLOBALS['xrestImageAdmin'] = XOOPS_URL . '/' . $GLOBALS['xrestModule']->getInfo('icons32');
 
@@ -68,7 +84,7 @@ if ($GLOBALS['xoopsUser']) {
 
 if (!isset($GLOBALS['xoopsTpl']) || !is_object($GLOBALS['xoopsTpl'])) {
     require_once XOOPS_ROOT_PATH . '/class/template.php';
-    $GLOBALS['xoopsTpl'] = new XoopsTpl();
+    $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
 $GLOBALS['xoopsTpl']->assign('pathImageIcon', $GLOBALS['xrestImageIcon']);

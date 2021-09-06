@@ -13,14 +13,17 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 class XrestCorePreload extends XoopsPreloadItem
 {
-    public function eventCoreIncludeCommonEnd($args)
+    public static function eventCoreIncludeCommonEnd($args)
     {
+        require __DIR__ . '/autoloader.php';
+
         $moduleHandler          = xoops_getHandler('module');
         $configHandler          = xoops_getHandler('config');
         $GLOBALS['xrestModule'] = $moduleHandler->getByDirname('xrest');
         if (is_object($GLOBALS['xrestModule'])) {
             $GLOBALS['xrestModuleConfig'] = $configHandler->getConfigList($GLOBALS['xrestModule']->getVar('mid'));
         }
+
         require_once XOOPS_ROOT_PATH . '/class/cache/xoopscache.php';
         $result = \XoopsCache::read('xrest_cleanup_last');
         if ((isset($result['when']) ? (float)$result['when'] : -microtime(true)) + $GLOBALS['xrestModuleConfig']['run_cleanup'] <= microtime(true)) {
@@ -59,5 +62,3 @@ class XrestCorePreload extends XoopsPreloadItem
         return $filelist;
     }
 }
-
-?>

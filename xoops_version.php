@@ -24,193 +24,228 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 // ------------------------------------------------------------------------- //
 
-$modversion['name']        = 'X-REST API Server';
-$modversion['version']     = 1.60;
-$modversion['releasedate'] = 'Saturday: 02 March 2013';
-$modversion['status']      = 'Mature';
-$modversion['author']      = 'Chronolabs Cooperative';
-$modversion['credits']     = 'Simon Roberts';
-$modversion['teammembers'] = 'Wishcraft';
-$modversion['license']     = 'GPL';
-$modversion['official']    = 1;
-$modversion['description'] = 'REST API Service to exchange JSON, Serialised or XML Packages with external server.';
-$modversion['help']        = '';
-$modversion['image']       = 'images/xrest_slogo.png';
-$modversion['dirname']     = 'xrest';
-$modversion['website']     = 'www.chronolabs.com.au';
+require __DIR__ . '/preloads/autoloader.php';
 
-$modversion['dirmoduleadmin'] = 'Frameworks/moduleclasses';
-$modversion['icons16']        = 'Frameworks/moduleclasses/icons/16';
-$modversion['icons32']        = 'Frameworks/moduleclasses/icons/32';
+$moduleDirName      = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-$modversion['moduleadmin'] = 'modules/xrest/admin';
-$modversion['modicons16']  = 'modules/xrest/images/icons/16';
-$modversion['modicons32']  = 'modules/xrest/images/icons/32';
+$modversion = [
+    'version'             => 2.00,
+    'module_status'       => 'Alpha 1',
+    'release_date'        => '2021/09/04',
+    'name'                => _MI_XREST_NAME,
+    'description'         => _MI_XREST_DESC,
+    'official'            => 0,
+    //1 indicates official XOOPS module supported by XOOPS Dev Team, 0 means 3rd party supported
+    'author'              => 'Chronolabs Cooperative',
+    'credits'             => 'Simon Roberts, Mamba, XOOPS Development Team',
+    'author_mail'         => 'author-email',
+    'author_website_url'  => 'https://xoops.org, www.chronolabs.com.au',
+    'author_website_name' => 'XOOPS',
+    'license'             => 'GPL 2.0 or later',
+    'license_url'         => 'www.gnu.org/licenses/gpl-2.0.html/',
+    //    'help'                => 'page=help',
+    // ------------------- Folders & Files -------------------
+    'release_info'        => 'Changelog',
+    'release_file'        => XOOPS_URL . "/modules/$moduleDirName/docs/changelog.txt",
 
-$modversion['release_info'] = 'Stable 2012/01/09';
-$modversion['release_file'] = XOOPS_URL . '/modules/xrest/docs/changelog.txt';
-$modversion['release_date'] = '2012/01/09';
-
-$modversion['author_realname']        = 'Simon Roberts';
-$modversion['author_website_url']     = 'http://www.chronolabs.com.au';
-$modversion['author_website_name']    = 'Chronolabs Cooperative';
-$modversion['author_email']           = 'meshy@chronolabs.com.au';
-$modversion['demo_site_url']          = '';
-$modversion['demo_site_name']         = '';
-$modversion['support_site_url']       = 'http://www.chronolabs.com.au/forums/';
-$modversion['support_site_name']      = 'x-rest';
-$modversion['submit_bug']             = 'http://www.chronolabs.com.au/forums/';
-$modversion['submit_feature']         = 'http://www.chronolabs.com.au/forums/';
-$modversion['usenet_group']           = 'sci.chronolabs';
-$modversion['maillist_announcements'] = '';
-$modversion['maillist_bugs']          = '';
-$modversion['maillist_features']      = '';
-
-// All tables should not have any prefix!
-$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
-
-// Tables created by sql file (without prefix!)
-$modversion['tables'][0] = 'rest_tables';
-$modversion['tables'][1] = 'rest_fields';
-$modversion['tables'][2] = 'rest_plugins';
-
-// Admin things
-$modversion['hasAdmin']   = 1;
-$modversion['system_menu']   = 1;
-$modversion['adminindex'] = 'admin/index.php';
-$modversion['adminmenu']  = 'admin/menu.php';
-
-// Menu
-$modversion['hasMain'] = 1;
+    'manual'              => 'link to manual file',
+    'manual_file'         => XOOPS_URL . "/modules/$moduleDirName/docs/install.txt",
+    // images
+    'image'               => 'assets/images/logoModule.png',
+    'iconsmall'           => 'assets/images/iconsmall.png',
+    'iconbig'             => 'assets/images/iconbig.png',
+    'dirname'             => $moduleDirName,
+    // Local path icons
+    'modicons16'          => 'assets/images/icons/16',
+    'modicons32'          => 'assets/images/icons/32',
+    'demo_site_url'       => 'https://xoops.org',
+    'demo_site_name'      => 'XOOPS Demo Site',
+    'support_url'         => 'https://xoops.org/modules/newbb/viewforum.php?forum=28/',
+    'support_name'        => 'Support Forum',
+    'submit_bug'          => 'https://github.com/XoopsModules25x/' . $moduleDirName . '/issues',
+    'module_website_url'  => 'www.xoops.org',
+    'module_website_name' => 'XOOPS Project',
+    // ------------------- Min Requirements -------------------
+    'min_php'             => '7.2',
+    'min_xoops'           => '2.5.10',
+    'min_admin'           => '1.2',
+    'min_db'              => ['mysql' => '5.5'],
+    // ------------------- Admin Menu -------------------
+    'system_menu'         => 1,
+    'hasAdmin'            => 1,
+    'adminindex'          => 'admin/index.php',
+    'adminmenu'           => 'admin/menu.php',
+    // ------------------- Main Menu -------------------
+    'hasMain'             => 1,
+    // ------------------- Install/Update -------------------
+    'onInstall'           => 'include/oninstall.php',
+    'onUpdate'            => 'include/onupdate.php',
+    //  'onUninstall'         => 'include/onuninstall.php',
+    // -------------------  PayPal ---------------------------
+    'paypal'              => [
+        'business'      => 'xoopsfoundation@gmail.com',
+        'item_name'     => 'Donation : ' . _MI_XREST_NAME,
+        'amount'        => 0,
+        'currency_code' => 'USD',
+    ],
+    // ------------------- Mysql -----------------------------
+    'sqlfile'             => ['mysql' => 'sql/mysql.sql'],
+    // ------------------- Tables ----------------------------
+    'tables'              => [
+        $moduleDirName . '_' . 'tables',
+        $moduleDirName . '_' . 'fields',
+        $moduleDirName . '_' . 'plugins',
+    ],
+];
 
 // Smarty
 $modversion['use_smarty'] = 0;
 
+// ------------------- Help files ------------------- //
+$modversion['help']        = 'page=help';
+$modversion['helpsection'] = [
+    ['name' => _MI_XREST_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_XREST_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_XREST_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_XREST_SUPPORT, 'link' => 'page=support'],
+];
+
 // Templates
-$i = 0;
-$i++;
-$modversion['templates'][$i]['file']        = 'complex_wsdl.xml';
-$modversion['templates'][$i]['description'] = 'SOAP 1.1 Request/Response via HTTP [WSDL Complex Sub-Template]';
-$i++;
-$modversion['templates'][$i]['file']        = 'element_wsdl.xml';
-$modversion['templates'][$i]['description'] = 'SOAP 1.1 Request/Response via HTTP [WSDL Elemental Complex Sub-Template]';
-$i++;
-$modversion['templates'][$i]['file']        = 'plugin_services.xml';
-$modversion['templates'][$i]['description'] = 'SOAP 1.1 Request/Response via HTTP - Alternative authoring style for the service [Services]';
-$i++;
-$modversion['templates'][$i]['file']        = 'plugin_wsdl.xml';
-$modversion['templates'][$i]['description'] = 'SOAP 1.1 Request/Response via HTTP - Alternative authoring style for the service [WSDL]';
-$i++;
-$modversion['templates'][$i]['file']        = 'plugin_xsd.xml';
-$modversion['templates'][$i]['description'] = 'SOAP 1.1 Request/Response via HTTP - Alternative authoring style for the service [XSD]';
-$i++;
-$modversion['templates'][$i]['file']        = 'wsdl.xml';
-$modversion['templates'][$i]['description'] = 'SOAP 1.1 Request/Response via HTTP';
 
-$i = 0;
-$i++;
-$modversion['config'][$i]['name']        = 'site_user_auth';
-$modversion['config'][$i]['title']       = '_XREST_MI_USERAUTH';
-$modversion['config'][$i]['description'] = '_XREST_MI_USERAUTHDESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 1;
-
-$i++;
-$modversion['config'][$i]['name']        = 'wsdl';
-$modversion['config'][$i]['title']       = '_XREST_MI_WSDL';
-$modversion['config'][$i]['description'] = '_XREST_MI_WSDL_DESC';
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 0;
-
-$i++;
-$modversion['config'][$i]['name']        = 'run_cleanup';
-$modversion['config'][$i]['title']       = '_XREST_MI_SECONDS_TO_CLEANUP';
-$modversion['config'][$i]['description'] = '_XREST_MI_SECONDS_TO_CLEANUP_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 86400;
-$modversion['config'][$i]['options']     = [
-    _XREST_MI_SECONDS_2419200 => 2419200,
-    _XREST_MI_SECONDS_604800  => 604800,
-    _XREST_MI_SECONDS_86400   => 86400,
-    _XREST_MI_SECONDS_43200   => 43200,
-    _XREST_MI_SECONDS_3600    => 3600,
-    _XREST_MI_SECONDS_1800    => 1800,
-    _XREST_MI_SECONDS_1200    => 1200,
-    _XREST_MI_SECONDS_600     => 600,
-    _XREST_MI_SECONDS_300     => 300,
-    _XREST_MI_SECONDS_180     => 180,
-    _XREST_MI_SECONDS_60      => 60,
-    _XREST_MI_SECONDS_30      => 30,
+$modversion['templates'] = [
+    ['file' => 'complex_wsdl.xml', 'description' => 'SOAP 1.1 Request/Response via HTTP [WSDL Complex Sub-Template]'],
+    ['file' => 'element_wsdl.xml', 'description' => 'SOAP 1.1 Request/Response via HTTP [WSDL Elemental Complex Sub-Template]'],
+    ['file' => 'plugin_services.xml', 'description' => 'SOAP 1.1 Request/Response via HTTP - Alternative authoring style for the service [Services]'],
+    ['file' => 'plugin_wsdl.xml', 'description' => 'SOAP 1.1 Request/Response via HTTP - Alternative authoring style for the service [WSDL]'],
+    ['file' => 'plugin_xsd.xml', 'description' => 'SOAP 1.1 Request/Response via HTTP - Alternative authoring style for the service [XSD]'],
+    ['file' => 'wsdl.xml', 'description' => 'SOAP 1.1 Request/Response via HTTP'],
 ];
 
-$i++;
-$modversion['config'][$i]['name']        = 'plugin_list_cache';
-$modversion['config'][$i]['title']       = '_XREST_MI_SECONDS_LIST_CACHE';
-$modversion['config'][$i]['description'] = '_XREST_MI_SECONDS_LIST_CACHE_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 3600;
-$modversion['config'][$i]['options']     = [
-    _XREST_MI_SECONDS_2419200 => 2419200,
-    _XREST_MI_SECONDS_604800  => 604800,
-    _XREST_MI_SECONDS_86400   => 86400,
-    _XREST_MI_SECONDS_43200   => 43200,
-    _XREST_MI_SECONDS_3600    => 3600,
-    _XREST_MI_SECONDS_1800    => 1800,
-    _XREST_MI_SECONDS_1200    => 1200,
-    _XREST_MI_SECONDS_600     => 600,
-    _XREST_MI_SECONDS_300     => 300,
-    _XREST_MI_SECONDS_180     => 180,
-    _XREST_MI_SECONDS_60      => 60,
-    _XREST_MI_SECONDS_30      => 30,
+
+
+$modversion['config'][] = [
+    'name'        => 'site_user_auth',
+    'title'       => '_XREST_MI_USERAUTH',
+    'description' => '_XREST_MI_USERAUTHDESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
 ];
 
-$i++;
-$modversion['config'][$i]['name']        = 'lock_seconds';
-$modversion['config'][$i]['title']       = '_XREST_MI_SECONDS';
-$modversion['config'][$i]['description'] = '_XREST_MI_SECONDS_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 180;
-$modversion['config'][$i]['options']     = [
-    _XREST_MI_SECONDS_3600 => 3600,
-    _XREST_MI_SECONDS_1800 => 1800,
-    _XREST_MI_SECONDS_1200 => 1200,
-    _XREST_MI_SECONDS_600  => 600,
-    _XREST_MI_SECONDS_300  => 300,
-    _XREST_MI_SECONDS_180  => 180,
-    _XREST_MI_SECONDS_60   => 60,
-    _XREST_MI_SECONDS_30   => 30,
+$modversion['config'][] = [
+    'name'        => 'wsdl',
+    'title'       => '_XREST_MI_WSDL',
+    'description' => '_XREST_MI_WSDL_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+
+$modversion['config'][] = [
+    'name'        => 'run_cleanup',
+    'title'       => '_XREST_MI_SECONDS_TO_CLEANUP',
+    'description' => '_XREST_MI_SECONDS_TO_CLEANUP_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 86400,
+    'options'     => [
+        _XREST_MI_SECONDS_2419200 => 2419200,
+        _XREST_MI_SECONDS_604800  => 604800,
+        _XREST_MI_SECONDS_86400   => 86400,
+        _XREST_MI_SECONDS_43200   => 43200,
+        _XREST_MI_SECONDS_3600    => 3600,
+        _XREST_MI_SECONDS_1800    => 1800,
+        _XREST_MI_SECONDS_1200    => 1200,
+        _XREST_MI_SECONDS_600     => 600,
+        _XREST_MI_SECONDS_300     => 300,
+        _XREST_MI_SECONDS_180     => 180,
+        _XREST_MI_SECONDS_60      => 60,
+        _XREST_MI_SECONDS_30      => 30,
+    ],
+];
+
+$modversion['config'][] = [
+    'name'        => 'plugin_list_cache',
+    'title'       => '_XREST_MI_SECONDS_LIST_CACHE',
+    'description' => '_XREST_MI_SECONDS_LIST_CACHE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 3600,
+    'options'     => [
+        _XREST_MI_SECONDS_2419200 => 2419200,
+        _XREST_MI_SECONDS_604800  => 604800,
+        _XREST_MI_SECONDS_86400   => 86400,
+        _XREST_MI_SECONDS_43200   => 43200,
+        _XREST_MI_SECONDS_3600    => 3600,
+        _XREST_MI_SECONDS_1800    => 1800,
+        _XREST_MI_SECONDS_1200    => 1200,
+        _XREST_MI_SECONDS_600     => 600,
+        _XREST_MI_SECONDS_300     => 300,
+        _XREST_MI_SECONDS_180     => 180,
+        _XREST_MI_SECONDS_60      => 60,
+        _XREST_MI_SECONDS_30      => 30,
+    ],
+];
+
+$modversion['config'][] = [
+    'name'        => 'lock_seconds',
+    'title'       => '_XREST_MI_SECONDS',
+    'description' => '_XREST_MI_SECONDS_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 180,
+    'options'     => [
+        _XREST_MI_SECONDS_3600 => 3600,
+        _XREST_MI_SECONDS_1800 => 1800,
+        _XREST_MI_SECONDS_1200 => 1200,
+        _XREST_MI_SECONDS_600  => 600,
+        _XREST_MI_SECONDS_300  => 300,
+        _XREST_MI_SECONDS_180  => 180,
+        _XREST_MI_SECONDS_60   => 60,
+        _XREST_MI_SECONDS_30   => 30,
+    ],
 ];
 
 // mt_srand((((float)('0' . substr(microtime(), strpos(microtime(), ' ') + 1, strlen(microtime()) - strpos(microtime(), ' ') + 1))) * random_int(30, 99999)));
 // mt_srand((((float)('0' . substr(microtime(), strpos(microtime(), ' ') + 1, strlen(microtime()) - strpos(microtime(), ' ') + 1))) * random_int(30, 99999)));
-$i++;
-$modversion['config'][$i]['name']        = 'lock_random_seed';
-$modversion['config'][$i]['title']       = '_XREST_MI_USERANDOMLOCK';
-$modversion['config'][$i]['description'] = '_XREST_MI_USERANDOMLOCK_DESC';
-$modversion['config'][$i]['formtype']    = 'text';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = random_int(30, 170);
 
-$i++;
-$modversion['config'][$i]['name']        = 'cache_seconds';
-$modversion['config'][$i]['title']       = '_XREST_MI_SECONDSCACHE';
-$modversion['config'][$i]['description'] = '_XREST_MI_SECONDSCACHE_DESC';
-$modversion['config'][$i]['formtype']    = 'select';
-$modversion['config'][$i]['valuetype']   = 'int';
-$modversion['config'][$i]['default']     = 3600;
-$modversion['config'][$i]['options']     = [
-    _XREST_MI_SECONDS_3600 => 3600,
-    _XREST_MI_SECONDS_1800 => 1800,
-    _XREST_MI_SECONDS_1200 => 1200,
-    _XREST_MI_SECONDS_600  => 600,
-    _XREST_MI_SECONDS_300  => 300,
-    _XREST_MI_SECONDS_180  => 180,
-    _XREST_MI_SECONDS_60   => 60,
-    _XREST_MI_SECONDS_30   => 30,
+$modversion['config'][] = [
+    'name'        => 'lock_random_seed',
+    'title'       => '_XREST_MI_USERANDOMLOCK',
+    'description' => '_XREST_MI_USERANDOMLOCK_DESC',
+    'formtype'    => 'text',
+    'valuetype'   => 'int',
+    'default'     => random_int(30, 170),
 ];
-?>
+
+$modversion['config'][] = [
+    'name'        => 'cache_seconds',
+    'title'       => '_XREST_MI_SECONDSCACHE',
+    'description' => '_XREST_MI_SECONDSCACHE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 3600,
+    'options'     => [
+        _XREST_MI_SECONDS_3600 => 3600,
+        _XREST_MI_SECONDS_1800 => 1800,
+        _XREST_MI_SECONDS_1200 => 1200,
+        _XREST_MI_SECONDS_600  => 600,
+        _XREST_MI_SECONDS_300  => 300,
+        _XREST_MI_SECONDS_180  => 180,
+        _XREST_MI_SECONDS_60   => 60,
+        _XREST_MI_SECONDS_30   => 30,
+    ],
+];
+
+/**
+ * Show Developer Tools?
+ */
+$modversion['config'][] = [
+    'name'        => 'displayDeveloperTools',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];

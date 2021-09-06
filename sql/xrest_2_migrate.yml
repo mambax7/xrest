@@ -1,0 +1,96 @@
+xrest_tables:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: tbl_id
+            attributes: ' int(20) unsigned  NOT NULL auto_increment'
+        -
+            name: tablename
+            attributes: ' varchar(220) '
+        -
+            name: allowpost
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: allowretrieve
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: allowupdate
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: visible
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: view
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: tbl_id
+            unique: true
+xrest_fields:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: fld_id
+            attributes: ' int(30) unsigned  NOT NULL auto_increment'
+        -
+            name: tbl_id
+            attributes: ' int(20)  DEFAULT ''0'' '
+        -
+            name: key
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: fieldname
+            attributes: ' varchar(220) '
+        -
+            name: allowpost
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: allowretrieve
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: allowupdate
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: visible
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: string
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: int
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: float
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: text
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: other
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+        -
+            name: crc
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: fld_id
+            unique: true
+xrest_plugins:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: plugin_id
+            attributes: ' int(10) unsigned  NOT NULL auto_increment'
+        -
+            name: plugin_name
+            attributes: ' varchar(255) '
+        -
+            name: plugin_file
+            attributes: ' varchar(255) '
+        -
+            name: active
+            attributes: ' tinyint(2)  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: plugin_id
+            unique: true

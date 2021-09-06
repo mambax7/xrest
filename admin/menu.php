@@ -1,37 +1,90 @@
 <?php
 
+use Xmf\Module\Admin;
+use XoopsModules\Xrest\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
+
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
+$moduleDirName = \basename(\dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
+
+$pathIcon32 = Admin::menuIconPath('');
+$pathModIcon32 = XOOPS_URL .   '/modules/' . $moduleDirName . '/assets/images/icons/32/';
+if (is_object($helper->getModule()) && false !== $helper->getModule()->getInfo('modicons32')) {
+    $pathModIcon32 = $helper->url($helper->getModule()->getInfo('modicons32'));
+}
+
 $moduleHandler          = xoops_getHandler('module');
 $GLOBALS['xrestModule'] = $moduleHandler->getByDirname('xrest');
 
-global $adminmenu;
-$adminmenu             = [];
-$adminmenu[0]['title'] = _XREST_MI_ADMINMENU_0;
-$adminmenu[0]['link']  = 'admin/index.php?op=dashboard';
-$adminmenu[0]['icon']  = '../../' . $GLOBALS['xrestModule']->getInfo('icons32') . '/home.png';
-$adminmenu[0]['image'] = '../../' . $GLOBALS['xrestModule']->getInfo('icons32') . '/home.png';
-$adminmenu[1]['title'] = _XREST_MI_ADMINMENU_1;
-$adminmenu[1]['link']  = 'admin/index.php?op=tables';
-$adminmenu[1]['icon']  = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.tables.png';
-$adminmenu[1]['image'] = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.tables.png';
-$adminmenu[2]['title'] = _XREST_MI_ADMINMENU_2;
-$adminmenu[2]['link']  = 'admin/index.php?op=fields';
-$adminmenu[2]['icon']  = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.fields.png';
-$adminmenu[2]['image'] = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.fields.png';
-$adminmenu[3]['title'] = _XREST_MI_ADMINMENU_3;
-$adminmenu[3]['link']  = 'admin/index.php?op=views';
-$adminmenu[3]['icon']  = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.views.png';
-$adminmenu[3]['image'] = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.views.png';
-$adminmenu[4]['title'] = _XREST_MI_ADMINMENU_4;
-$adminmenu[4]['link']  = 'admin/index.php?op=plugins';
-$adminmenu[4]['icon']  = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.plugins.png';
-$adminmenu[4]['image'] = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.plugins.png';
-$adminmenu[5]['title'] = _XREST_MI_ADMINMENU_5;
-$adminmenu[5]['link']  = 'admin/permissions.php';
-$adminmenu[5]['icon']  = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.permissions.png';
-$adminmenu[5]['image'] = '../../' . $GLOBALS['xrestModule']->getInfo('modicons32') . '/xrest.permissions.png';
-$adminmenu[6]['title'] = _XREST_MI_ADMINMENU_6;
-$adminmenu[6]['link']  = 'admin/index.php?op=about';
-$adminmenu[6]['icon']  = '../../' . $GLOBALS['xrestModule']->getInfo('icons32') . '/about.png';
-$adminmenu[6]['image'] = '../../' . $GLOBALS['xrestModule']->getInfo('icons32') . '/about.png';
+$adminmenu[] = [
+    'title' => _XREST_MI_ADMINMENU_0,
+    'link'  => 'admin/index.php?op=dashboard',
+    'icon'  => $pathIcon32 . '/home.png',
+    'image' => $pathIcon32 . '/home.png',
+];
 
-?>
+$adminmenu[] = [
+    'title' => _XREST_MI_ADMINMENU_1,
+    'link'  => 'admin/index.php?op=tables',
+    'icon'  => $pathModIcon32 . '/xrest.tables.png',
+    'image' => $pathModIcon32 . '/xrest.tables.png',
+];
+
+$adminmenu[] = [
+    'title' => _XREST_MI_ADMINMENU_2,
+    'link'  => 'admin/index.php?op=fields',
+    'icon'  => $pathModIcon32 . '/xrest.fields.png',
+    'image' => $pathModIcon32 . '/xrest.fields.png',
+];
+
+$adminmenu[] = [
+    'title' => _XREST_MI_ADMINMENU_3,
+    'link'  => 'admin/index.php?op=views',
+    'icon'  => $pathModIcon32 . '/xrest.views.png',
+    'image' => $pathModIcon32 . '/xrest.views.png',
+];
+
+$adminmenu[] = [
+    'title' => _XREST_MI_ADMINMENU_4,
+    'link'  => 'admin/index.php?op=plugins',
+    'icon'  => $pathModIcon32 . '/xrest.plugins.png',
+    'image' => $pathModIcon32 . '/xrest.plugins.png',
+];
+
+$adminmenu[] = [
+    'title' => _XREST_MI_ADMINMENU_5,
+    'link'  => 'admin/permissions.php',
+    'icon'  => $pathModIcon32 . '/xrest.permissions.png',
+    'image' => $pathModIcon32 . '/xrest.permissions.png',
+];
+
+//$adminmenu[] = [
+//    'title' => _XREST_MI_ADMINMENU_6,
+//    'link'  => 'admin/index.php?op=about',
+//    'icon'  => $pathIcon32 . '/about.png',
+//    'image' => $pathIcon32 . '/about.png',
+//];
+
+if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools')) {
+    $adminmenu[] = [
+        'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE'),
+        'link' => 'admin/migrate.php',
+        'icon' => $pathIcon32 . '/database_go.png',
+    ];
+}
+
+$adminmenu[] = [
+    'title' => _MI_XREST_MENU_ABOUT,
+    'link' => 'admin/about.php',
+    'icon' => $pathIcon32 . '/about.png',
+];

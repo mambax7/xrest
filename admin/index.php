@@ -1,5 +1,9 @@
 <?php
 
+use XoopsModules\Xrest\{
+    Helper
+};
+
 require __DIR__ . '/admin_header.php';
 
 $op     = ($_REQUEST['op'] ?? 'dashboard');
@@ -14,27 +18,27 @@ switch ($op) {
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation('index.php?op=dashboard');
 
-        $pluginsHandler = xoops_getModuleHandler('plugins', 'xrest');
-        $tablesHandler  = xoops_getModuleHandler('tables', 'xrest');
-        $fieldsHandler  = xoops_getModuleHandler('fields', 'xrest');
+        $pluginsHandler = Helper::getInstance()->getHandler('plugins');
+        $tablesHandler  = Helper::getInstance()->getHandler('tables');
+        $fieldsHandler  = Helper::getInstance()->getHandler('fields');
 
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->addInfoBox(_XREST_AM_XREST_SUMANDTOTAL);
         $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_PLUGINS . '</label>', $pluginsHandler->getCount(), ($pluginsHandler->getCount() > 0 ? 'Green' : 'Red'));
-        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_ACTIVE_PLUGINS . '</label>', $pluginsHandler->getCount(new Criteria('`active`', '1', '=')), ($pluginsHandler->getCount(new Criteria('`active`', '1', '=')) > 0 ? 'Green' : 'Red'));
-        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_INACTIVE_PLUGINS . '</label>', $pluginsHandler->getCount(new Criteria('`active`', '0', '=')), ($pluginsHandler->getCount(new Criteria('`active`', '0', '=')) > 0 ? 'Green' : 'Red'));
+        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_ACTIVE_PLUGINS . '</label>', $pluginsHandler->getCount(new \Criteria('`active`', '1', '=')), ($pluginsHandler->getCount(new \Criteria('`active`', '1', '=')) > 0 ? 'Green' : 'Red'));
+        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_INACTIVE_PLUGINS . '</label>', $pluginsHandler->getCount(new \Criteria('`active`', '0', '=')), ($pluginsHandler->getCount(new \Criteria('`active`', '0', '=')) > 0 ? 'Green' : 'Red'));
         $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_FAILED_PLUGINS . '</label>', (int)XoopsCache::read('xrest_plugins_failed'), ((int)XoopsCache::read('xrest_plugins_failed') > 0 ? 'Red' : 'Green'));
-        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_TABLES . '</label>', $tablesHandler->getCount(new Criteria('`view`', '0', '=')), ($tablesHandler->getCount(new Criteria('`view`', '0', '=')) > 0 ? 'Green' : 'Red'));
-        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_VIEWS . '</label>', $tablesHandler->getCount(new Criteria('`view`', '1', '=')), ($tablesHandler->getCount(new Criteria('`view`', '1', '=')) > 0 ? 'Green' : 'Red'));
+        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_TABLES . '</label>', $tablesHandler->getCount(new \Criteria('`view`', '0', '=')), ($tablesHandler->getCount(new \Criteria('`view`', '0', '=')) > 0 ? 'Green' : 'Red'));
+        $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_VIEWS . '</label>', $tablesHandler->getCount(new \Criteria('`view`', '1', '=')), ($tablesHandler->getCount(new \Criteria('`view`', '1', '=')) > 0 ? 'Green' : 'Red'));
         $adminObject->addInfoBoxLine(_XREST_AM_XREST_SUMANDTOTAL, '<label>' . _XREST_AM_XREST_TOTAL_FIELDS . '</label>', $fieldsHandler->getCount(), ($tablesHandler->getCount() > 0 ? 'Green' : 'Red'));
         $adminObject->addInfoBoxLine(
             _XREST_AM_XREST_SUMANDTOTAL,
             '<label>' . _XREST_AM_XREST_AVERAGE_FIELDS . '</label>',
-            number_format(($fieldsHandler->getCount() + 1) / ($tablesHandler->getCount(new Criteria('`view`', '0', '=')) + 1), 2),
-            (number_format(($fieldsHandler->getCount() + 1) / ($tablesHandler->getCount(new Criteria('`view`', '0', '=')) + 1), 2) > 0 ? 'Green' : 'Red')
+            number_format(($fieldsHandler->getCount() + 1) / ($tablesHandler->getCount(new \Criteria('`view`', '0', '=')) + 1), 2),
+            (number_format(($fieldsHandler->getCount() + 1) / ($tablesHandler->getCount(new \Criteria('`view`', '0', '=')) + 1), 2) > 0 ? 'Green' : 'Red')
         );
         $lastplugin = XoopsCache::read('xrest_plugins_last');
-        if (count($lastplugin) >= 5) {
+        if (is_array($lastplugin) && count($lastplugin) >= 5) {
             $adminObject->addInfoBox(_XREST_AM_XREST_LASTANDDATE);
             $adminObject->addInfoBoxLine(_XREST_AM_XREST_LASTANDDATE, '<label>' . _XREST_AM_XREST_LAST_PLUGINS_CALLED . '</label>', $lastplugin['plugin'], 'Blue');
             if (!empty($lastplugin['user'])) {
@@ -161,7 +165,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
         break;
 
     case 'savefields':
-        $fieldsHandler = xoops_getModuleHandler('fields', 'xrest');
+        $fieldsHandler = Helper::getInstance()->getHandler('fields');
         foreach ($_POST['id'] as $id => $fld_id) {
             switch ($fld_id) {
                 case 'new':
@@ -181,7 +185,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
 
     case 'savetables':
 
-        $tablesHandler = xoops_getModuleHandler('tables', 'xrest');
+        $tablesHandler = Helper::getInstance()->getHandler('tables');
         foreach ($_POST['id'] as $id => $tbl_id) {
             switch ($tbl_id) {
                 case 'new':
@@ -199,7 +203,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
         break;
     case 'saveviews':
 
-        $tablesHandler = xoops_getModuleHandler('tables', 'xrest');
+        $tablesHandler = Helper::getInstance()->getHandler('tables');
         foreach ($_POST['id'] as $id => $tbl_id) {
             switch ($tbl_id) {
                 case 'new':
@@ -219,7 +223,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
 
     case 'saveplugins':
 
-        $pluginsHandler = xoops_getModuleHandler('plugins', 'xrest');
+        $pluginsHandler = Helper::getInstance()->getHandler('plugins');
         foreach ($_POST['id'] as $id => $plugin_id) {
             switch ($plugin_id) {
                 case 'new':

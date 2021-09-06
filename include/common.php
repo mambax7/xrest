@@ -52,7 +52,7 @@ function checkright($function_file, $username, $password)
     $GLOBALS['xrestModule']         = $moduleHandler->getByDirname('xrest');
     $GLOBALS['xrestPlugin']['user'] = $username;
 
-    $pluginHandler = xoops_getModuleHandler('plugins', 'xrest');
+    $pluginHandler = Helper::getInstance()->getHandler('plugins');
     $plugin        = $pluginHandler->getPluginWithFile($function_file);
     $item_id       = $plugin->getVar('plugin_id');
     $modid         = $GLOBALS['xrestModule']->getVar('mid');

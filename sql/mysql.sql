@@ -1,4 +1,4 @@
-CREATE TABLE `rest_tables` (
+CREATE TABLE `xrest_tables` (
     `tbl_id`        INT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `tablename`     VARCHAR(220) DEFAULT NULL,
     `allowpost`     TINYINT(2)   DEFAULT '0',
@@ -9,7 +9,7 @@ CREATE TABLE `rest_tables` (
     PRIMARY KEY (`tbl_id`)
 );
 
-CREATE TABLE `rest_fields` (
+CREATE TABLE `xrest_fields` (
     `fld_id`        INT(30) UNSIGNED NOT NULL AUTO_INCREMENT,
     `tbl_id`        INT(20)      DEFAULT '0',
     `key`           TINYINT(2)   DEFAULT '0',
@@ -27,7 +27,7 @@ CREATE TABLE `rest_fields` (
     PRIMARY KEY (`fld_id`)
 );
 
-CREATE TABLE `rest_plugins` (
+CREATE TABLE `xrest_plugins` (
     `plugin_id`   INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `plugin_name` VARCHAR(255) DEFAULT NULL,
     `plugin_file` VARCHAR(255) DEFAULT NULL,

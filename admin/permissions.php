@@ -1,9 +1,13 @@
 <?php
 
+use XoopsModules\Xrest\{
+    Helper
+};
+
 require_once __DIR__ . '/admin_header.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
-xoops_loadLanguage('forms', 'xrest');
+xoops_loadLanguage('forms');
 $op = ($_REQUEST['op'] ?? 'default');
 
 xoops_cp_header();
@@ -16,10 +20,10 @@ switch ($op) {
         $moduleHandler          = xoops_getHandler('module');
         $GLOBALS['xrestModule'] = $moduleHandler->getByDirname('xrest');
         // View Categories permissions
-        $pluginsHandler = xoops_getModuleHandler('plugins', 'xrest');
+        $pluginsHandler = Helper::getInstance()->getHandler('plugins');
         $plugins        = $pluginsHandler->getObjects(null, true);
         if (count($plugins)) {
-            $form_view = new XoopsGroupPermForm(
+            $form_view = new \XoopsGroupPermForm(
                 _XREST_FRM_VIEW_FUNCTION,
                 $GLOBALS['xrestModule']->getVar('mid'),
                 'plugin_call',

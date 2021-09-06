@@ -49,4 +49,32 @@ define('_XREST_MI_NOPERMFORPLUGIN', 'No Permission for plug-in');
 // Version 1.60
 define('_XREST_MI_WSDL', 'Support SOAP Web Services Description Language (WSDL)');
 define('_XREST_MI_WSDL_DESC', 'WSDL is an XML format for describing network services as a set of endpoints operating on messages containing either document-oriented or procedure-oriented information. (<a href="http://www.w3.org/TR/wsdl" target="_blank">Click here for more Info</a>)');
-?>
+
+//2.00
+define('_MI_XREST_NAME', 'X-REST API Server');
+define('_MI_XREST_DESC', 'REST API Service to exchange JSON, Serialised or XML Packages with external server.');
+
+//Menu
+define('_MI_XREST_MENU_HOME', 'Home');
+define('_MI_XREST_MENU_01', 'Admin');
+define('_MI_XREST_MENU_ABOUT', 'About');
+
+
+//Config
+define('MI_XREST_EDITOR_ADMIN', 'Editor: Admin');
+define('MI_XREST_EDITOR_ADMIN_DESC', 'Select the Editor to use by the Admin');
+define('MI_XREST_EDITOR_USER', 'Editor: User');
+define('MI_XREST_EDITOR_USER_DESC', 'Select the Editor to use by the User');
+
+//Help
+define('_MI_XREST_DIRNAME', basename(dirname(__DIR__, 2)));
+define('_MI_XREST_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
+define('_MI_XREST_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_XREST_OVERVIEW', 'Overview');
+
+//define('_MI_XREST_HELP_DIR', __DIR__);
+
+//help multi-page
+define('_MI_XREST_DISCLAIMER', 'Disclaimer');
+define('_MI_XREST_LICENSE', 'License');
+define('_MI_XREST_SUPPORT', 'Support');
