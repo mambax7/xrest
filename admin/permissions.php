@@ -7,7 +7,7 @@ xoops_loadLanguage('forms', 'xrest');
 $op = ($_REQUEST['op'] ?? 'default');
 
 xoops_cp_header();
-loadModuleAdminMenu(5);
+//loadModuleAdminMenu(5);
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation('permissions.php');
 

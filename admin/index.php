@@ -11,7 +11,7 @@ switch ($op) {
 
         xoops_load('xoopscache');
         xoops_cp_header();
-        loadModuleAdminMenu(0);
+//        loadModuleAdminMenu(0);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation('index.php?op=dashboard');
 
@@ -58,7 +58,7 @@ switch ($op) {
         break;
     case 'about':
         xoops_cp_header();
-        loadModuleAdminMenu(6);
+//        loadModuleAdminMenu(6);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation('index.php?op=about');
 
@@ -123,7 +123,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
         }
 
         xoops_cp_header();
-        loadModuleAdminMenu(2);
+//        loadModuleAdminMenu(2);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation('index.php?op=fields');
 
@@ -136,7 +136,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
     case 'views':
 
         xoops_cp_header();
-        loadModuleAdminMenu(3);
+//        loadModuleAdminMenu(3);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation('index.php?op=views');
 
@@ -147,7 +147,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
     case 'plugins':
 
         xoops_cp_header();
-        loadModuleAdminMenu(4);
+//        loadModuleAdminMenu(4);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation('index.php?op=plugins');
 
@@ -158,7 +158,7 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
     case 'tables':
 
         xoops_cp_header();
-        loadModuleAdminMenu(1);
+//        loadModuleAdminMenu(1);
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation('index.php?op=tables');
 

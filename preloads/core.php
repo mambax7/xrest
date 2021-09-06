@@ -22,7 +22,7 @@ class XrestCorePreload extends XoopsPreloadItem
             $GLOBALS['xrestModuleConfig'] = $configHandler->getConfigList($GLOBALS['xrestModule']->getVar('mid'));
         }
         require_once XOOPS_ROOT_PATH . '/class/cache/xoopscache.php';
-        $result = XoopsCache::read('xrest_cleanup_last');
+        $result = \XoopsCache::read('xrest_cleanup_last');
         if ((isset($result['when']) ? (float)$result['when'] : -microtime(true)) + $GLOBALS['xrestModuleConfig']['run_cleanup'] <= microtime(true)) {
             $result          = [];
             $result['when']  = microtime(true);
@@ -32,11 +32,11 @@ class XrestCorePreload extends XoopsPreloadItem
                 @unlink(XOOPS_VAR_PATH . '/caches/xoops_data/' . $file);
             }
             $result['took'] = microtime(true) - $result['when'];
-            XoopsCache::write('xrest_cleanup_last', $result, $GLOBALS['xrestModuleConfig']['run_cleanup'] * 2);
+            \XoopsCache::write('xrest_cleanup_last', $result, $GLOBALS['xrestModuleConfig']['run_cleanup'] * 2);
         }
     }
 
-    public function getFileListAsArray($dirname, $prefix = 'xrest')
+    public static function getFileListAsArray($dirname, $prefix = 'xrest')
     {
         $filelist = [];
         if ('/' == substr($dirname, -1)) {
